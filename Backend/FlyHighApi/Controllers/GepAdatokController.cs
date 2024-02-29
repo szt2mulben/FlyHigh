@@ -39,14 +39,14 @@ namespace FlyHighApi.Controllers
           {
               return NotFound();
           }
-            var tapanyagok = await _context.gepadatok.FindAsync(id);
+            var gepek = await _context.gepadatok.FindAsync(id);
 
-            if (tapanyagok == null)
+            if (gepek == null)
             {
                 return NotFound();
             }
 
-            return tapanyagok;
+            return gepek;
         }
 
         // PUT: api/Gepadatok/5
@@ -119,5 +119,14 @@ namespace FlyHighApi.Controllers
         {
             return (_context.gepadatok?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        // GET: api/Gepadatok/search/{keresesiKriterium}
+        [HttpGet("search/{keresesiKriterium}")]
+        public async Task<ActionResult<IEnumerable<GepAdatokModel>>> SearchGepadatok(string keresesiKriterium)
+        {
+            var gepadatok = await _context.gepadatok.Where(g => g.Gepneve.Contains(keresesiKriterium)).ToListAsync();
+            return gepadatok;
+        }
+
     }
 }
