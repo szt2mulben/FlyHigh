@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+    <h1>Kezdőlap</h1><br>
+    <h2>FlyHigh - Flight Solutions.</h2>
+  
 </template>
 
 <style>

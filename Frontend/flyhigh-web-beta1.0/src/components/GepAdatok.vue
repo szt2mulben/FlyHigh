@@ -44,7 +44,7 @@ if(teszt.value != "")
   } catch (error) {
     console.error('Hiba történt a gépadatok keresése közben:', error);
   }
-}else{ alert("Ne hagy üresen a mezőt.")}
+}else{ alert("Ne hagy üresen a mezőt.")} s
 };
 </script>
 
