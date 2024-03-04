@@ -16,6 +16,10 @@ namespace FlyHighApi.Models
         }
 
         public virtual DbSet<GepAdatokModel> gepadatok { get; set; } = null!;
+        public virtual DbSet<UseradatokModel> UserData
+        {
+            get; set;
+        }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
