@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Feb 17. 16:40
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Létrehozás ideje: 2024. Már 08. 20:34
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,10 +41,31 @@ CREATE TABLE `gepadatok` (
 --
 
 INSERT INTO `gepadatok` (`Id`, `Gepneve`, `Foglaltturista`, `Foglalt1oszt`, `Elsoosztulohelyek`, `Turistaulohelyek`) VALUES
-(1, 'B-550', 23, 43, 7, 45),
-(2, 'ZF-870', 43, 63, 4, 12),
+(2, 'ZF-870', 43, 63, 4, 34543),
 (3, 'RTG-820', 54, 84, 12, 13),
-(4, 'M-900', 32, 76, 12, 23);
+(4, 'M-900', 32, 76, 12, 23),
+(5, 'sfgdg', 44, 3, 3, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `userdata`
+--
+
+CREATE TABLE `userdata` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `userdata`
+--
+
+INSERT INTO `userdata` (`Id`, `Name`, `Password`, `Email`) VALUES
+(1, 'teszt', 'tesztjelszo123', 'teszt@teszt.hu'),
+(5, 'sadasd', 'asdasdad', 'saasd@sdda.hu');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -57,6 +78,12 @@ ALTER TABLE `gepadatok`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- A tábla indexei `userdata`
+--
+ALTER TABLE `userdata`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
 
@@ -64,7 +91,13 @@ ALTER TABLE `gepadatok`
 -- AUTO_INCREMENT a táblához `gepadatok`
 --
 ALTER TABLE `gepadatok`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT a táblához `userdata`
+--
+ALTER TABLE `userdata`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
