@@ -29,16 +29,6 @@ const router = createRouter({
   ]
 });
  
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!isLoggedIn()) {
-      next({ name: 'LoginRegister' });
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-});
+
 
 export default router

@@ -14,7 +14,7 @@ namespace FlyHighApi.Models
         public int Id { get; set; }
 
         [StringLength(50)]
-        public string Gepneve { get; set; }
+        public string? Gepneve { get; set; }
         [Column(TypeName = "int(11)")]
         public int Foglaltturista { get; set; }
         [Column(TypeName = "int(11)")]

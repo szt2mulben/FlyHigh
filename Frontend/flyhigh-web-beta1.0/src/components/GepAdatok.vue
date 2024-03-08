@@ -12,7 +12,36 @@
         <p><span>Foglalt elsőosztály:</span> {{gepek.foglalt1oszt}}</p>
         <p><span>ELsőosztály ulohelyek:</span> {{gepek.elsoosztulohelyek}}</p>
         <p><span>Turistaulohelyek:</span> {{gepek.turistaulohelyek}}</p>
+        <p>
+          <button @click="deletegep(gepek.id)">Törlés</button>
+          <button @click="showEditModal(gepek)">Módosítás</button>
+        </p> 
       </div>
+    </div>
+  </div>
+  
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" @click="hideEditModal">&times;</span>
+      <h2>Módosítás</h2>
+      <form @submit.prevent="saveChanges">
+        <label for="editedGepneve">Gép neve:</label>
+        <input type="text" id="editedGepneve" v-model="editedGep.gepneve" required> <br>
+
+        <label for="editedFoglaltturista">Foglalt turista:</label>
+        <input type="number" id="editedFoglaltturista" v-model="editedGep.foglaltturista" required><br>
+
+        <label for="editedFoglalt1oszt">Foglalt elsőosztály:</label>
+        <input type="number" id="editedFoglalt1oszt" v-model="editedGep.foglalt1oszt" required><br>
+
+        <label for="editedElsoosztulohelyek">Első osztályú ülések:</label>
+        <input type="number" id="editedElsoosztulohelyek" v-model="editedGep.elsoosztulohelyek" required><br>
+
+        <label for="editedTuristaulohelyek">Turista ülések:</label>
+        <input type="number" id="editedTuristaulohelyek" v-model="editedGep.turistaulohelyek" required><br>
+
+        <button type="submit">Mentés</button>
+      </form>
     </div>
   </div>
 </template>
@@ -24,7 +53,7 @@ import { onMounted, ref } from 'vue';
 const gepadatok = ref([]);
 const kereses = ref('');
 const megjelenitettGepadatok = ref([]);
-
+const editedGep = ref({});
 
 onMounted(() => {
   axios.get('https://localhost:7151/api/Gepadatok')
@@ -34,17 +63,48 @@ onMounted(() => {
   });
 });
 
-
 const keresesValtozas = async () => {
-if(teszt.value != "")
-{
-  try {
-    const response = await axios.get(`https://localhost:7151/api/Gepadatok/search/${kereses.value}`);
-    megjelenitettGepadatok.value = response.data;
-  } catch (error) {
-    console.error('Hiba történt a gépadatok keresése közben:', error);
+  if (kereses.value !== "") {
+    try {
+      const response = await axios.get(`https://localhost:7151/api/Gepadatok/search/${kereses.value}`);
+      megjelenitettGepadatok.value = response.data;
+    } catch (error) {
+      console.error('Hiba történt a gépadatok keresése közben:', error);
+    }
+  } else {
+    alert("Ne hagy üresen a mezőt.");
   }
-}else{ alert("Ne hagy üresen a mezőt.")} s
+};
+
+const deletegep = (id) => {
+  axios.delete('https://localhost:7151/api/Gepadatok/' + id)
+  .then(() => {
+    megjelenitettGepadatok.value = megjelenitettGepadatok.value.filter(meg => meg.id != id)
+  });
+};
+
+const showEditModal = (gep) => {
+  editedGep.value = { ...gep };
+  const modal = document.getElementById('editModal');
+  modal.style.display = 'block';
+};
+
+const hideEditModal = () => {
+  const modal = document.getElementById('editModal');
+  modal.style.display = 'none';
+};
+
+const saveChanges = async () => {
+  try {
+    await axios.put(`https://localhost:7151/api/Gepadatok/${editedGep.value.id}`, editedGep.value);
+    const index = megjelenitettGepadatok.value.findIndex(gep => gep.id === editedGep.value.id);
+    if (index !== -1) {
+      megjelenitettGepadatok.value[index] = { ...editedGep.value };
+    }
+    hideEditModal();
+  } catch (error) {
+    console.error('Hiba történt a változtatások mentése közben:', error);
+  }
 };
 </script>
 
@@ -74,5 +134,39 @@ if(teszt.value != "")
 
 .search-container {
   margin-bottom: 20px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
