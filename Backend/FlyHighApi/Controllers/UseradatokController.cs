@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.Common;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -44,9 +45,11 @@ namespace FlyHighApi.Controllers
                 }
                 else
                 {
+                    Debug.Write("Sikeres belepes.");
                     var token = GenerateJwtToken(user.Id);
                     Debug.Write(token);
                     return Ok(new { Token = token });
+
                 }
             }
             catch (Exception ex)

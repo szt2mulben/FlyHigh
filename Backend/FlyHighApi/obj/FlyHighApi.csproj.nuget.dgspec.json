@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Felhasználó\\Desktop\\FlyHigh\\Backend\\FlyHighApi\\FlyHighApi.csproj": {}
+    "C:\\Users\\mulat\\OneDrive\\Asztali gép\\FlyHigh\\Backend\\FlyHighApi\\FlyHighApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Felhasználó\\Desktop\\FlyHigh\\Backend\\FlyHighApi\\FlyHighApi.csproj": {
+    "C:\\Users\\mulat\\OneDrive\\Asztali gép\\FlyHigh\\Backend\\FlyHighApi\\FlyHighApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Felhasználó\\Desktop\\FlyHigh\\Backend\\FlyHighApi\\FlyHighApi.csproj",
+        "projectUniqueName": "C:\\Users\\mulat\\OneDrive\\Asztali gép\\FlyHigh\\Backend\\FlyHighApi\\FlyHighApi.csproj",
         "projectName": "FlyHighApi",
-        "projectPath": "C:\\Users\\Felhasználó\\Desktop\\FlyHigh\\Backend\\FlyHighApi\\FlyHighApi.csproj",
-        "packagesPath": "C:\\Users\\Felhasználó\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Felhasználó\\Desktop\\FlyHigh\\Backend\\FlyHighApi\\obj\\",
+        "projectPath": "C:\\Users\\mulat\\OneDrive\\Asztali gép\\FlyHigh\\Backend\\FlyHighApi\\FlyHighApi.csproj",
+        "packagesPath": "C:\\Users\\mulat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mulat\\OneDrive\\Asztali gép\\FlyHigh\\Backend\\FlyHighApi\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Felhasználó\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mulat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

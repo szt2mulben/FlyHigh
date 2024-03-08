@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>Bejelentkezés</h2>
+  <div class="container">
+    <h2 v-if="!showRegisterForm">Bejelentkezés</h2>
     <form v-if="!showRegisterForm">
       <input type="text" v-model="loginData.name" placeholder="Felhasználónév" required>
       <input type="password" v-model="loginData.password" placeholder="Jelszó" required>
@@ -18,6 +18,7 @@
     </form>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -56,9 +57,12 @@ export default {
             'Name': loginData.name,
             'Password': loginData.password,
         });
+
+        console.log(response.data)
+
         const token = response.data.Token || response.data.token;
         if (!token) {
-            console.error('Hiba: Token nem található a válaszban');
+            console.log('Hiba: Token nem található a válaszban');
             return;
         }
         console.log(token);
@@ -80,12 +84,12 @@ const register = async () => {
 
         const token = response.data.Token || response.data.token;
         if (!token) {
-            console.error('Hiba: Token nem található a válaszban');
+            console.log('Hiba: Token nem található a válaszban');
             return;
         }
 
         localStorage.setItem('regtoken', token);
-        console.log(localStorage.getItem('regtoken'));
+        console.log(token);
         showRegisterForm.value = false;
     } catch (error) {
         console.error('Hiba:', error);
@@ -98,3 +102,57 @@ const register = async () => {
   }
 };
 </script>
+<style scoped>
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+</style>
+
