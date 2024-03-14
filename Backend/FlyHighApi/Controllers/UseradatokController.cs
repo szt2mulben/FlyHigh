@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using NuGet.Common;
+using System;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
+using FlyHighApi.Service;
 
 namespace FlyHighApi.Controllers
 {
@@ -34,52 +36,57 @@ namespace FlyHighApi.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UseradatokModel>> Login(UseradatokModel loginModel)
+        public async Task<ActionResult<UseradatokModel>> Login(Useradatok loginModel)
         {
             try
             {
                 var user = await _context.UserData.SingleOrDefaultAsync(u => u.Name == loginModel.Name && u.Password == loginModel.Password);
                 if (user == null)
                 {
+                    Debug.WriteLine("Sikertelen belépés: Felhasználó nem található.");
                     return Unauthorized();
                 }
                 else
                 {
-                    Debug.Write("Sikeres belepes.");
-                    var token = GenerateJwtToken(user.Id);
-                    Debug.Write(token);
+                    var token = GenerateJwtToken(5);
+                    Debug.WriteLine($"Név: {user.Name}");
+                    Debug.WriteLine($"Jog.: {user.Permission}");
+                    Debug.WriteLine($"Sikeres belépés. Token: {token}");
                     return Ok(new { Token = token });
-
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Belépési hiba: {ex.Message}");
+                Debug.WriteLine($"Beléptetési hiba: {ex.Message}");
+                return StatusCode(500, $"Beléptetési hiba: {ex.Message}");
             }
         }
 
 
         [HttpPost("register")]
-        public async Task<ActionResult<UseradatokModel>> Register(UseradatokModel registerModel)
+        public async Task<ActionResult<UseradatokModel>> Register(Useradatok registerModel)
         {
             try
             {
                 var existingUser = await _context.UserData.SingleOrDefaultAsync(u => u.Name == registerModel.Name);
                 if (existingUser != null)
-                { 
+                {
+                    Debug.WriteLine("Sikertelen regisztráció: Felhasználónév már foglalt.");
                     return Conflict("A felhasználónév már foglalt.");
                 }
                 else
                 {
-                    _context.UserData.Add(registerModel);
+                    var user = new UseradatokModel { Id = registerModel.Id, Name = registerModel.Name, Password = registerModel.Password, Email = registerModel.Email, Permission = "Ügyfél" };
+                    _context.UserData.Add(user);
                     await _context.SaveChangesAsync();
-                    var token = GenerateJwtToken(registerModel.Id);
+                    var token = GenerateJwtToken(user.Id);
+                    Debug.WriteLine($"Sikeres regisztráció. Token: {token}");
                     return Ok(new { Token = token });
                 }
-                //var user = new UseradatokModel { Id = registerModel.Id, Name = registerModel.Name, Password = registerModel.Password, Email = registerModel.Email };
             }
             catch (Exception ex)
             {
+                Debug.WriteLine($"Regisztrációs hiba: {ex.Message}");
                 return StatusCode(500, $"Regisztrációs hiba: {ex.Message}");
             }
         }
@@ -88,12 +95,13 @@ namespace FlyHighApi.Controllers
         private string GenerateJwtToken(int userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            var jwtKeyString = JwtKeyGenerator.GenerateJwtKey();
+            var key = Encoding.ASCII.GetBytes(jwtKeyString);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+            new Claim(ClaimTypes.NameIdentifier, userId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

@@ -16,6 +16,9 @@ namespace FlyHighApi.Models
         public string Password { get; set; } = null!;
         [StringLength(50)]
         public string Email { get; set; } = null!;
+        [StringLength(50)]
+        public string Permission { get; set; } = null!;
+
 
     }
 }

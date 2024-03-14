@@ -52,25 +52,19 @@ export default {
 
 
   const login = async () => {
-    try {
         const response = await axios.post(`https://localhost:7151/api/Useradatok/login`, {
             'Name': loginData.name,
             'Password': loginData.password,
         });
 
-        console.log(response.data)
-
+        console.log(response.data.Token)
         const token = response.data.Token || response.data.token;
         if (!token) {
             console.log('Hiba: Token nem található a válaszban');
             return;
         }
-        console.log(token);
         localStorage.setItem('logtoken', token);
         router.push('/home');
-    } catch (error) {
-        console.error('Hiba:', error);
-    }
 };
 
 
@@ -80,6 +74,7 @@ const register = async () => {
             'Name': registerData.name,
             'Password': registerData.password,
             'Email': registerData.email,
+            'Permission' : "Ügyfél"
         });
 
         const token = response.data.Token || response.data.token;
