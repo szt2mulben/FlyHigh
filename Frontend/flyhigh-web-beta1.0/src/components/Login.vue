@@ -20,26 +20,23 @@
 </template>
 
 
-<script>
+<script setup>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue';
 
-export default {
-  setup() {
     const router = useRouter();
     const loginData = {
       name: '',
-      password: ''
+      password: '',
     };
     const registerData = {
       name: '',
       password: '',
-      email: ''
+      email: '',
     };
 
 
-    const lastId = ref('');
     const showRegisterForm = ref(false);
     const userek = ref([]);
 
@@ -50,26 +47,33 @@ export default {
     });
   });
 
-
   const login = async () => {
-        const response = await axios.post(`https://localhost:7151/api/Useradatok/login`, {
+    try{
+       const response =  await axios.post(`https://localhost:7151/api/Useradatok/login`, {
             'Name': loginData.name,
             'Password': loginData.password,
         });
-
-        console.log(response.data.Token)
-        const token = response.data.Token || response.data.token;
-        if (!token) {
-            console.log('Hiba: Token nem található a válaszban');
-            return;
-        }
-        localStorage.setItem('logtoken', token);
         router.push('/home');
+    }catch (error) {
+        console.error('Hiba:', error);
+    }
+    // const data = response.data.success;
+    // console.log(data)
+    // if (data == true) {
+    //   alert("Sikeres belépés")
+    //   setTimeout(() => {
+    //       router.push("/home");
+    //   }, 100);
+    // } else {
+    //     alert('Hiba: Sikertelen belépés');
+    // }
 };
+
 
 
 const register = async () => {
     try {
+      console.log("registercucc")
         const response = await axios.post(`https://localhost:7151/api/Useradatok/register`, {
             'Name': registerData.name,
             'Password': registerData.password,
@@ -91,11 +95,6 @@ const register = async () => {
     }
 };
 
-
-
-    return { login, register, loginData, registerData, showRegisterForm };
-  }
-};
 </script>
 <style scoped>
 .container {

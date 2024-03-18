@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="dropdown">
       <span class="dropdown-toggle">Felhasználók</span>
       <div class="dropdown-menu">
-        <RouterLink to="">Teszt</RouterLink>
+        <RouterLink to="/ujgep">Teszt</RouterLink>
       </div>
     </div>
     <div class="dropdown">
