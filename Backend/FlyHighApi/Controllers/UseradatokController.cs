@@ -43,17 +43,9 @@ namespace FlyHighApi.Controllers
                 var user = await _context.UserData.SingleOrDefaultAsync(u => u.Name == loginModel.Name && u.Password == loginModel.Password);
                 if (user == null)
                 {
-                    return Unauthorized();
+                    return Unauthorized("Sikertelen.");
                 }
                 return Ok(user);
-                //else
-                //{
-                //    var token = GenerateJwtToken(user.Id);
-                //    Debug.WriteLine($"Név: {user.Name}");
-                //    Debug.WriteLine($"Jog.: {user.Permission}");
-                //    Debug.WriteLine($"Sikeres belépés. Token: {token}");
-                //    return Ok(user);
-                //}
             }
             catch (Exception ex)
             {

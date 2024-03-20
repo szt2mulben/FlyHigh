@@ -1,7 +1,6 @@
 <template>
     <h1>Kezdőlap</h1><br>
     <h2>FlyHigh - Flight Solutions.</h2>
-  
 </template>
 
 <style>

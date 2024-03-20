@@ -4,7 +4,7 @@
     <form v-if="!showRegisterForm">
       <input type="text" v-model="loginData.name" placeholder="Felhasználónév" required>
       <input type="password" v-model="loginData.password" placeholder="Jelszó" required>
-      <button type="submit" @click="login()">Bejelentkezés</button>
+      <button type="submit" @click.prevent="login()">Bejelentkezés</button>
       <p>Még nem regisztráltál? <a href="#" @click="showRegisterForm = true">Regisztráció</a></p>
     </form>
 
@@ -19,83 +19,65 @@
   </div>
 </template>
 
-
 <script setup>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
-    const router = useRouter();
-    const loginData = {
-      name: '',
-      password: '',
-    };
-    const registerData = {
-      name: '',
-      password: '',
-      email: '',
-    };
-
-
-    const showRegisterForm = ref(false);
-    const userek = ref([]);
-
-    onMounted(() => {
-    axios.get('https://localhost:7151/api/Useradatok')
-    .then(resp => {
-        userek.value = resp.data;
-    });
-  });
-
-  const login = async () => {
-    try{
-       const response =  await axios.post(`https://localhost:7151/api/Useradatok/login`, {
-            'Name': loginData.name,
-            'Password': loginData.password,
-        });
-        router.push('/home');
-    }catch (error) {
-        console.error('Hiba:', error);
-    }
-    // const data = response.data.success;
-    // console.log(data)
-    // if (data == true) {
-    //   alert("Sikeres belépés")
-    //   setTimeout(() => {
-    //       router.push("/home");
-    //   }, 100);
-    // } else {
-    //     alert('Hiba: Sikertelen belépés');
-    // }
+const router = useRouter();
+const loginData = {
+  name: '',
+  password: '',
 };
+const registerData = {
+  name: '',
+  password: '',
+  email: '',
+};
+const showRegisterForm = ref(false);
 
+const login = async () => {
+  try {
+    const response = await axios.post(`https://localhost:7151/api/Useradatok/login`, {
+      'Name': loginData.name,
+      'Password': loginData.password,
+    });
 
+    if (response.status === 200) {
+      router.push('/ujgep');
+    } else {
+      console.log('Hiba: Sikertelen beléptetés');
+    }
+  } catch (error) {
+    console.error('Hiba:', error);
+  }
+};
 
 const register = async () => {
-    try {
-      console.log("registercucc")
-        const response = await axios.post(`https://localhost:7151/api/Useradatok/register`, {
-            'Name': registerData.name,
-            'Password': registerData.password,
-            'Email': registerData.email,
-            'Permission' : "Ügyfél"
-        });
+  try {
+    console.log("registercucc")
+    const response = await axios.post(`https://localhost:7151/api/Useradatok/register`, {
+      'Name': registerData.name,
+      'Password': registerData.password,
+      'Email': registerData.email,
+      'Permission' : "Ügyfél"
+    });
 
-        const token = response.data.Token || response.data.token;
-        if (!token) {
-            console.log('Hiba: Token nem található a válaszban');
-            return;
-        }
-
-        localStorage.setItem('regtoken', token);
-        console.log(token);
-        showRegisterForm.value = false;
-    } catch (error) {
-        console.error('Hiba:', error);
+    const token = response.data.Token || response.data.token;
+    if (!token) {
+      console.log('Hiba: Token nem található a válaszban');
+      return;
     }
-};
 
+    localStorage.setItem('regtoken', token);
+    console.log(token);
+    showRegisterForm.value = false;
+  } catch (error) {
+    console.error('Hiba:', error);
+  }
+};
 </script>
+
 <style scoped>
 .container {
   max-width: 400px;
@@ -149,4 +131,3 @@ a:hover {
   text-decoration: underline;
 }
 </style>
-

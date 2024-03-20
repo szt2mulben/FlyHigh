@@ -1,9 +1,36 @@
+<script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
+export default {
+  setup() {
+    const store = useStore()
+    const loggedInUser = computed(() => store.state.isLoggedIn)
+
+    return { loggedInUser }
+  }
+}
+</script>
+
+
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
   <nav>
+    <div class="dropdown" v-if="loggedInUser">
+      <span class="dropdown-toggle">{{ loggedInUser }}</span>
+      <div class="dropdown-menu">
+        <button @click="logout">Kijelentkezés</button>
+      </div>
+    </div>
+    <div class="dropdown" v-else>
+      <span class="dropdown-toggle">Bejelentkezés</span>
+      <div class="dropdown-menu">
+        <RouterLink to="/loginregister">Bejelentkezés</RouterLink>
+      </div>
+    </div>
     <div class="dropdown">
       <span class="dropdown-toggle">Felhasználók</span>
       <div class="dropdown-menu">
