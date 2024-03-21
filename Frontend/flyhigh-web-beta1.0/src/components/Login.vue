@@ -43,8 +43,13 @@ const login = async () => {
       'Password': loginData.password,
     });
 
+    const tokens = response.data.Token || response.data.token;
+
     if (response.status === 200) {
-      router.push('/ujgep');
+      localStorage.setItem('token', tokens);
+      router.push('/home');
+
+
     } else {
       console.log('Hiba: Sikertelen beléptetés');
     }
@@ -60,7 +65,7 @@ const register = async () => {
       'Name': registerData.name,
       'Password': registerData.password,
       'Email': registerData.email,
-      'Permission' : "Ügyfél"
+      'Permission' : "Ugyfel"
     });
 
     const token = response.data.Token || response.data.token;

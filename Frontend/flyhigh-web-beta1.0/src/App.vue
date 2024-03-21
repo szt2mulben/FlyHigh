@@ -1,36 +1,34 @@
-<script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-
-export default {
-  setup() {
-    const store = useStore()
-    const loggedInUser = computed(() => store.state.isLoggedIn)
-
-    return { loggedInUser }
-  }
-}
-</script>
-
-
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue';
+import { parseToken, getUsername, getPermissions, logout } from './utils/auth.js';
+
+const token = localStorage.getItem('token');
+const payload = parseToken(token);
+
+const user = getUsername(payload);
+const per = getPermissions(payload);
+
+
 </script>
 
 <template>
   <nav>
-    <div class="dropdown" v-if="loggedInUser">
-      <span class="dropdown-toggle">{{ loggedInUser }}</span>
-      <div class="dropdown-menu">
-        <button @click="logout">Kijelentkezés</button>
-      </div>
+    <div style="float: right;">
+  <div class="dropdown" v-if="payload && user">
+    <span class="dropdown-toggle">{{ user }}</span>
+    <div class="dropdown-menu" style="right: 0;">
+      <span @click="logout()">Kijelentkezés</span>
+      <RouterLink to="/felhasznaloiadatok">Felhasználói adatok</RouterLink>
     </div>
-    <div class="dropdown" v-else>
-      <span class="dropdown-toggle">Bejelentkezés</span>
-      <div class="dropdown-menu">
-        <RouterLink to="/loginregister">Bejelentkezés</RouterLink>
-      </div>
+  </div>
+  <div class="dropdown" v-else>
+    <span class="dropdown-toggle">Bejelentkezés</span>
+    <div class="dropdown-menu" style="right: 0;">
+      <RouterLink to="/loginregister">Bejelentkezés</RouterLink>
     </div>
+  </div>
+</div>
     <div class="dropdown">
       <span class="dropdown-toggle">Felhasználók</span>
       <div class="dropdown-menu">

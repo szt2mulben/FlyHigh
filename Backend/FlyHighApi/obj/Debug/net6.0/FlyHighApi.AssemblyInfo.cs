@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlyHighApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6225f11c02a5597eebaf54255bfecc5a3e11abf7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b14eb2dd873d9a4161e38fd6b2e8dba622637e8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlyHighApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlyHighApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

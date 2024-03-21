@@ -13,6 +13,11 @@ const router = createRouter({
       component: AboutView
     },
     {
+      path: '/felhasznaloiadatok',
+      name: 'felhasznaloadat',
+      component: AboutView
+    },
+    {
       path: '/home',
       name: 'home',
       component: HomeView,

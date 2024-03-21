@@ -45,7 +45,10 @@ namespace FlyHighApi.Controllers
                 {
                     return Unauthorized("Sikertelen.");
                 }
-                return Ok(user);
+
+                var token = GenerateJwtToken(user);
+                Debug.WriteLine("token: " + token);
+                return Ok(new { Token = token });
             }
             catch (Exception ex)
             {
@@ -53,6 +56,7 @@ namespace FlyHighApi.Controllers
                 return StatusCode(500, $"Beléptetési hiba: {ex.Message}");
             }
         }
+
 
 
         [HttpPost("register")]
@@ -71,7 +75,7 @@ namespace FlyHighApi.Controllers
                     var user = new UseradatokModel { Id = registerModel.Id, Name = registerModel.Name, Password = registerModel.Password, Email = registerModel.Email, Permission = "Ügyfél" };
                     _context.UserData.Add(user);
                     await _context.SaveChangesAsync();
-                    var token = GenerateJwtToken(user.Id);
+                    var token = GenerateJwtToken(user);
                     Debug.WriteLine($"Sikeres regisztráció. Token: {token}");
                     return Ok(new { Token = token });
                 }
@@ -84,7 +88,7 @@ namespace FlyHighApi.Controllers
         }
 
 
-        private string GenerateJwtToken(int userId)
+        private string GenerateJwtToken(UseradatokModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwtKeyString = JwtKeyGenerator.GenerateJwtKey();
@@ -93,7 +97,9 @@ namespace FlyHighApi.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-            new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim("Names", user.Name),
+                    new Claim("Permissions", user.Permission)
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
