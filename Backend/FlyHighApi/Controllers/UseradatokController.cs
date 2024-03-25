@@ -35,6 +35,55 @@ namespace FlyHighApi.Controllers
             return await _context.UserData.ToListAsync();
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Putuserek(int id, UseradatokModel userek)
+        {
+            if (id != userek.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(userek).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!userekExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deleteuser(int id)
+        {
+            if (_context.UserData == null)
+            {
+                return NotFound();
+            }
+            var user = await _context.UserData.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.UserData.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
         [HttpPost("login")]
         public async Task<ActionResult<UseradatokModel>> Login(Useradatok loginModel)
         {
@@ -75,9 +124,7 @@ namespace FlyHighApi.Controllers
                     var user = new UseradatokModel { Id = registerModel.Id, Name = registerModel.Name, Password = registerModel.Password, Email = registerModel.Email, Permission = "Ügyfél" };
                     _context.UserData.Add(user);
                     await _context.SaveChangesAsync();
-                    var token = GenerateJwtToken(user);
-                    Debug.WriteLine($"Sikeres regisztráció. Token: {token}");
-                    return Ok(new { Token = token });
+                    return Ok();
                 }
             }
             catch (Exception ex)
@@ -85,6 +132,11 @@ namespace FlyHighApi.Controllers
                 Debug.WriteLine($"Regisztrációs hiba: {ex.Message}");
                 return StatusCode(500, $"Regisztrációs hiba: {ex.Message}");
             }
+        }
+
+        private bool userekExists(int id)
+        {
+            return (_context.UserData?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
 

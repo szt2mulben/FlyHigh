@@ -8,18 +8,19 @@ const payload = parseToken(token);
 
 const user = getUsername(payload);
 const per = getPermissions(payload);
-
+const isLoggedIn = ref(!!user);
 
 </script>
 
 <template>
   <nav>
+  <div v-if="isLoggedIn">
     <div style="float: right;">
   <div class="dropdown" v-if="payload && user">
-    <span class="dropdown-toggle">{{ user }}</span>
+    <span class="dropdown-toggle">Bejelentkezve <b>{{ user }}</b> néven.</span>
     <div class="dropdown-menu" style="right: 0;">
-      <span @click="logout()">Kijelentkezés</span>
-      <RouterLink to="/felhasznaloiadatok">Felhasználói adatok</RouterLink>
+      <span @click="logout()" style="margin: 20px;">Kijelentkezés</span>
+      <RouterLink to="/sajatadatok">Saját adatok</RouterLink>
     </div>
   </div>
   <div class="dropdown" v-else>
@@ -32,16 +33,25 @@ const per = getPermissions(payload);
     <div class="dropdown">
       <span class="dropdown-toggle">Felhasználók</span>
       <div class="dropdown-menu">
-        <RouterLink to="/ujgep">Teszt</RouterLink>
+        <RouterLink to="/felhasznaloiadatok">Jogosultságok</RouterLink>
       </div>
     </div>
     <div class="dropdown">
       <span class="dropdown-toggle">Légijáratok</span>
       <div class="dropdown-menu">
         <RouterLink to="/ujgep">Új GépAdatok</RouterLink>
-        <RouterLink to="/home">GépAdatok</RouterLink>
+        <RouterLink to="/gepadatok">GépAdatok</RouterLink>
+        <RouterLink to="">Repülőtér</RouterLink>
+        <RouterLink to="">Repülőtársaság</RouterLink>
       </div>
     </div>
+    <div class="dropdown">
+      <span class="dropdown-toggle">Jegykezelés</span>
+      <div class="dropdown-menu">
+        <RouterLink to="/jegyek">Jegyek</RouterLink>
+      </div>
+    </div>
+  </div>
   </nav>
 
   <RouterView />

@@ -12,10 +12,11 @@
         <p><span>Foglalt elsőosztály:</span> {{gepek.foglalt1oszt}}</p>
         <p><span>ELsőosztály ulohelyek:</span> {{gepek.elsoosztulohelyek}}</p>
         <p><span>Turistaulohelyek:</span> {{gepek.turistaulohelyek}}</p>
-        <p>
+        <!-- Gombok csak adminisztrátor esetén jelennek meg -->
+        <p v-if="currentUserPermission === 'Admin'">
           <button @click="deletegep(gepek.id)">Törlés</button>
           <button @click="showEditModal(gepek)">Módosítás</button>
-        </p> 
+        </p>
       </div>
     </div>
   </div>
@@ -49,17 +50,27 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import { parseToken, getPermissions,  getUsername } from '../../utils/auth.js';
+
+const token = localStorage.getItem('token');
+const payload = parseToken(token);
+
+const user = getUsername(payload);
+const per = getPermissions(payload);
+
 
 const gepadatok = ref([]);
 const kereses = ref('');
 const megjelenitettGepadatok = ref([]);
 const editedGep = ref({});
+const currentUserPermission = ref('');
 
 onMounted(() => {
   axios.get('https://localhost:7151/api/Gepadatok')
   .then(resp => {
       gepadatok.value = resp.data;
       megjelenitettGepadatok.value = resp.data;
+      currentUserPermission.value = per;
   });
 });
 
@@ -107,7 +118,6 @@ const saveChanges = async () => {
   }
 };
 </script>
-
 <style scoped>
 .gep-container {
   display: flex;

@@ -1,5 +1,5 @@
 <script setup>
-import gepadatok from '../components/GepAdatok.vue'
+import gepadatok from '../components/GepAdatok/GepAdatok.vue'
 </script>
 
 <template>

@@ -47,7 +47,7 @@ const login = async () => {
 
     if (response.status === 200) {
       localStorage.setItem('token', tokens);
-      router.push('/home');
+      router.push('/');
 
 
     } else {
@@ -60,7 +60,6 @@ const login = async () => {
 
 const register = async () => {
   try {
-    console.log("registercucc")
     const response = await axios.post(`https://localhost:7151/api/Useradatok/register`, {
       'Name': registerData.name,
       'Password': registerData.password,
@@ -68,15 +67,11 @@ const register = async () => {
       'Permission' : "Ugyfel"
     });
 
-    const token = response.data.Token || response.data.token;
-    if (!token) {
-      console.log('Hiba: Token nem található a válaszban');
-      return;
+    if (response.status === 200) {
+      showRegisterForm.value = false;
+    } else {
+      console.log('Hiba: Sikertelen beléptetés');
     }
-
-    localStorage.setItem('regtoken', token);
-    console.log(token);
-    showRegisterForm.value = false;
   } catch (error) {
     console.error('Hiba:', error);
   }
