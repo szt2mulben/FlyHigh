@@ -1,6 +1,7 @@
 ﻿using FlyHighApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace FlyHighApi.Controllers
 {
@@ -26,5 +27,28 @@ namespace FlyHighApi.Controllers
             }
             return await _flyhighdbContext.jegyadatok.ToListAsync();
         }
+
+        [HttpPost("search")]
+        public async Task<ActionResult<JegyAdatokModel>> Search(JegyAdatok jegyek)
+        {
+            try
+            {
+                var jegyAdatok = await _flyhighdbContext.jegyadatok
+                    .Where(j => j.honnan == jegyek.honnan && j.hova == jegyek.hova)
+                    .ToListAsync();
+
+                if (jegyAdatok == null || !jegyAdatok.Any())
+                {
+                    return NotFound("Nincs ilyen járat.");
+                }
+                Debug.WriteLine(jegyAdatok);
+                return Ok(jegyAdatok);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Hiba történt a keresés közben.");
+            }
+        }
+
     }
 }

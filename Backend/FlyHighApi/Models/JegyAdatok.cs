@@ -17,13 +17,5 @@ namespace FlyHighApi.Models
 
         public DateTime? ido { get; set; }
 
-        [StringLength(50)]
-        public string? utazok { get; set; }
-
-        [StringLength(50)]
-        public string? osztaly { get; set; }
-
-
-
     }
 }

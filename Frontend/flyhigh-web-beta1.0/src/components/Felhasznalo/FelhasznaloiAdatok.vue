@@ -144,10 +144,11 @@ const saveChanges = async () => {
   padding: 10px;
   background-color: #f0f0f0;
   border-bottom: 1px solid #ccc;
+  margin: 20px;
 }
 
 .info p {
-  margin: px 0;
+  margin: 5px 0;
   font-weight: bold;
 }
 
