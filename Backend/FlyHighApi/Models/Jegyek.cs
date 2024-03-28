@@ -18,13 +18,25 @@ namespace FlyHighApi.Models
         [StringLength(50)]
         public string? erkezes_hely { get; set; }
 
-        public DateTime? ido { get; set; }
-
         [StringLength(50)]
-        public string? utazok { get; set; }
+        public string? indulasido { get; set; }
+
+        [Column(TypeName = "int(11)")]
+        public int? utazok { get; set; }
 
         [StringLength(50)]
         public string? osztaly { get; set; }
+
+        [Column(TypeName = "int(11)")]
+        public int? ar { get; set; }
+
+        [StringLength(50)]
+        public string? erkezesido { get; set; }
+
+        [StringLength(50)]
+        public string? SorSzek { get; set; }
+
+
 
     }
 }

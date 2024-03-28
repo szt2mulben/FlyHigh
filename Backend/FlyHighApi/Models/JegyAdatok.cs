@@ -17,5 +17,12 @@ namespace FlyHighApi.Models
 
         public DateTime? ido { get; set; }
 
+        [Column(TypeName = "int(11)")]
+        public int? ora { get; set; }
+
+        [Column(TypeName = "int(11)")]
+        public int? perc { get; set; }
+
+
     }
 }

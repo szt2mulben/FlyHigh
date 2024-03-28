@@ -29,9 +29,9 @@ const router = createRouter({
       meta: { requiresAuth: true , roles: ['Admin', 'Ugyfel']}
     },
     {
-      path: '/jegyek',
-      name: 'jegyek',
-      component: () => import('../views/JegykezelesView.vue'),
+      path: '/jegyadatok',
+      name: 'jegyadatok',
+      component: () => import('../views/JegyAdatokView.vue'),
       meta: { requiresAuth: true , roles: ['Admin', 'Ugyfel']}
     },
     {

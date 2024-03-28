@@ -1,6 +1,7 @@
 ﻿using FlyHighApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System.Diagnostics;
 
 namespace FlyHighApi.Controllers
@@ -28,13 +29,13 @@ namespace FlyHighApi.Controllers
             return await _flyhighdbContext.jegyadatok.ToListAsync();
         }
 
-        [HttpPost("search")]
-        public async Task<ActionResult<JegyAdatokModel>> Search(JegyAdatok jegyek)
+        [HttpGet("search")]
+        public async Task<ActionResult<JegyAdatokModel>> Search(string honnan, string hova)
         {
             try
             {
                 var jegyAdatok = await _flyhighdbContext.jegyadatok
-                    .Where(j => j.honnan == jegyek.honnan && j.hova == jegyek.hova)
+                    .Where(j => j.honnan == honnan && j.hova == hova)
                     .ToListAsync();
 
                 if (jegyAdatok == null || !jegyAdatok.Any())

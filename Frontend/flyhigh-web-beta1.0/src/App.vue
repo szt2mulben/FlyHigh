@@ -48,7 +48,7 @@ const isLoggedIn = ref(!!user);
     <div class="dropdown">
       <span class="dropdown-toggle">Jegykezelés</span>
       <div class="dropdown-menu">
-        <RouterLink to="/jegyek">Jegyek</RouterLink>
+        <RouterLink to="/jegyadatok">Jegyek</RouterLink>
       </div>
     </div>
   </div>

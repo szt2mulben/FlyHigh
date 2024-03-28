@@ -6,22 +6,38 @@
           <p><span>Név:</span> {{user.name}}</p>
           <p><span>Jelszó:</span> ********</p>
           <p><span>Email:</span> {{user.email}}</p>
-          <p><span>Jogosultság:</span> {{user.permission}}</p>
         </div>
       </div>
     </div> 
-    <h2>Jegyek:</h2>   
+    <h2>Repjegy(ek):</h2>
+    <div class="search-results">
+      <div class="flight-card" v-for="(flight, index) in jegyek" :key="index">
+        <div class="left" style="margin: 5px; padding: 10px; ">
+          <div>Honnan: {{ flight.indulas_hely }}</div>
+          <div>Indulás ideje: {{ flight.indulasido }}</div>
+          <div>Utasok száma: {{ flight.utazok }}</div>
+          <div>Osztály: {{ flight.osztaly }}</div>
+        </div>
+        <div class="right"style="margin: 5px; padding: 10px;">
+          <div>Hova: {{ flight.erkezes_hely }}</div>
+          <div>Érkezés ideje: {{ flight.erkezesido }}</div>
+          <div>Ár: {{ flight.ar }} Ft</div>
+        </div>
+      </div>
+    </div>
   </template>
   <script setup>
   import axios from 'axios';
   import { onMounted, ref } from 'vue';
-  import { parseToken, getUsername } from '../../utils/auth.js';
+  import { parseToken, getUsername, getPermissions } from '../../utils/auth.js';
 
 const token = localStorage.getItem('token');
 const payload = parseToken(token);
 
 const user = getUsername(payload);
 const sajatadat = ref([]);
+const jegyek = ref([]);
+
 
   onMounted(() => {
     axios.get('https://localhost:7151/api/Useradatok')
@@ -32,6 +48,16 @@ const sajatadat = ref([]);
             }else continue;      
         }
     });
+    axios.get('https://localhost:7151/api/Jegykezeles')
+    .then(resp => {
+      jegyek.value = resp.data.filter(ticket => ticket.megrendelo_nev === user);
+    })
+    .catch(error => {
+      console.error('Error fetching countries:', error);
+    });
+
+
+
   });
 
 
@@ -62,5 +88,22 @@ const sajatadat = ref([]);
     margin: 20px 0;
     font-weight: bold;
   }
+  .flight-card .left, .flight-card .right {
+  flex: 1;
+}
+
+.flight-card .right {
+  text-align: right;
+}
+.flight-card {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.search-results {
+  margin-top: 20px;
+}
+
   
   </style>

@@ -121,7 +121,7 @@ namespace FlyHighApi.Controllers
                 }
                 else
                 {
-                    var user = new UseradatokModel { Id = registerModel.Id, Name = registerModel.Name, Password = registerModel.Password, Email = registerModel.Email, Permission = "Ügyfél" };
+                    var user = new UseradatokModel { Id = registerModel.Id, Name = registerModel.Name, Password = registerModel.Password, Email = registerModel.Email, Permission = "Ugyfel" };
                     _context.UserData.Add(user);
                     await _context.SaveChangesAsync();
                     return Ok();
