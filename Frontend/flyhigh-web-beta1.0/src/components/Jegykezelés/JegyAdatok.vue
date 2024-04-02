@@ -55,7 +55,7 @@
       <h2>Utas adatok</h2>
       <div class="passenger-info">
         <div v-for="(passenger, index) in passengerCount" :key="index">
-          <h3>{{ index + 1 }} utas adatai:</h3>
+          <h3>{{ index + 1 }}. utas adatai:</h3>
           <div class="field">
             <select>
               <option value="male">Férfi</option>
@@ -111,12 +111,20 @@
         <p>Foglalja le az Önnek megfelelő helyet a repülőgépen, így elkerülheti a légitársaság automatikus helyválasztását!</p>
         <button @click="toggleSeatSelector">Ülőhely kiválasztás</button>
       </div>
+      <button @click="finalizeBooking">Véglegesítés</button>
       <transition name="slide">
-        <div class="plane-seats" v-if="showSeatSelector">
+      <div v-if="showSeatSelector" class="seat-selector">
+        <button class="close-btn" @click="toggleSeatSelector">X</button>
+        <h2>Kérlek válassz széket:</h2>
+        <div class="plane-seats">
           <div class="left-column">
             <div class="column" v-for="row in 2" :key="row">
               <div class="row" v-for="column in 2" :key="column">
-                <div class="seat" v-for="seatNumber in 30" :key="(row - 1) * 30 + seatNumber" @click="selectSeat(row, seatNumber, column)">
+                <div class="seat"
+                    :class="{ 'unavailable': isSeatBooked(row, seatNumber, column), 'selected': isSelectedSeat(row, seatNumber, column) }"
+                    v-for="seatNumber in 30"
+                    :key="(row - 1) * 30 + seatNumber"
+                    @click="selectSeat(row, seatNumber, column)">
                   {{ getSeatLabel(row, seatNumber, column) }}
                 </div>
               </div>
@@ -126,15 +134,20 @@
           <div class="right-column">
             <div class="column" v-for="row in 2" :key="row">
               <div class="row" v-for="column in 2" :key="column">
-                <div class="seat" v-for="seatNumber in 30" :key="(3 + column - 1) * 30 + seatNumber" @click="selectSeat(row, seatNumber, 3 + column)">
+                <div class="seat"
+                    :class="{ 'unavailable': isSeatBooked(row, seatNumber, 3 + column), 'selected': isSelectedSeat(row, seatNumber, 3 + column) }"
+                    v-for="seatNumber in 30"
+                    :key="(3 + column - 1)  * 30 + seatNumber"
+                    @click="selectSeat(row, seatNumber, 3 + column)">
                   {{ getSeatLabel(row, seatNumber, 3 + column) }}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </transition>
-    </div>
+      </div>
+    </transition>    
+   </div>
   </div>
 </template>
 
@@ -142,6 +155,8 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { parseToken, getUsername } from '../../utils/auth.js';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const token = localStorage.getItem('token');
 const payload = parseToken(token);
@@ -156,12 +171,13 @@ const countries = ref([]);
 const searchResults = ref([]);
 const bookingCompleted = ref(false);
 const showSeatSelector = ref(false);
+const bookedSeats = ref([]);
 
 const toggleSeatSelector = () => {
   showSeatSelector.value = !showSeatSelector.value;
 };
 
-onMounted(() => {
+onMounted(async() => {
   axios.get('https://localhost:7151/api/Orszagok')
     .then(resp => {
       countries.value = resp.data;
@@ -169,6 +185,20 @@ onMounted(() => {
     .catch(error => {
       console.error('Error fetching countries:', error);
     });
+    try {
+       const response = await axios.get('https://localhost:7151/api/Jegykezeles');
+        response.data.forEach(seat => {
+          if (seat.sorSzek.includes(';')) {
+            const seats = seat.sorSzek.split(';').map(part => part.split(',').map(val => parseInt(val.trim())));
+            seats.forEach(seatArray => bookedSeats.value.push(seatArray));
+          } else {
+            const singleSeat = seat.sorSzek.split(',').map(part => parseInt(part.trim()));
+            bookedSeats.value.push(singleSeat);
+          }
+        });
+    } catch (error) {
+      console.error('Hiba a foglalt székek lekérdezésekor:', error);
+    }
 });
 
 const generateRandomPrice = () => {
@@ -198,7 +228,6 @@ const searchFlights = async () => {
           user : user,
           from: from.value,
           to: to.value,
-          time : seged.value[id-1].ido,
           departure: `${seged.value[id-1].ora}:${seged.value[id-1].perc}` ,
           arrival: `${(seged.value[id-1].ora)+2}:${seged.value[id-1].perc}`,
           class : flightClass.value,
@@ -223,40 +252,98 @@ const reserveTicket = async (flight) => {
   }
 };
 
-// Új függvények a székek kezeléséhez
 const selectedSeats = ref([]);
 const selectedSeatsData = ref([]);
 
 const selectSeat = (row, seatNumber, column) => {
   const seatIndex = (row - 1) * 30 + (column - 1) * 30 + seatNumber;
-  if (!selectedSeats.value.includes(seatIndex)) {
-    selectedSeats.value.push(seatIndex);
-    selectedSeatsData.value.push({
-      row,
-      seatNumber,
-      column,
-    });
-  } else {
+  const isBooked = isSeatBooked(row, seatNumber, column);
+  
+  if (selectedSeats.value.includes(seatIndex)) {
     const index = selectedSeats.value.indexOf(seatIndex);
     if (index > -1) {
       selectedSeats.value.splice(index, 1);
-      selectedSeatsData.value.splice(index, 1);
+      const seatData = `${row}, ${seatNumber}, ${column}`;
+      selectedSeatsData.value = selectedSeatsData.value.split(';').filter(item => item !== seatData).join(';');      
     }
+    return; 
   }
-  saveSelectedSeatsData();
+
+  if (selectedSeats.value.length < passengerCount.value) {
+    if (!isBooked) {
+      if (!selectedSeats.value.includes(seatIndex)) {
+        selectedSeats.value.push(seatIndex);
+        if (selectedSeatsData.value != 0) {
+            selectedSeatsData.value += `;${row}, ${seatNumber}, ${column}`
+        } else {
+          selectedSeatsData.value += `${row}, ${seatNumber}, ${column}`
+        }
+      }
+    }
+  } else {
+    console.log('Maximum seat count reached.');
+  }
 };
 
 const getSeatLabel = (row, seatNumber, column) => {
   const seatIndex = (row - 1) * 30 + (column - 1) * 30 + seatNumber;
-
-  return `${seatIndex}`;
+  const isBooked = isSeatBooked(row, seatNumber, column);
+  if (isBooked) {
+    return 'X';
+  } else {
+    return `${seatIndex}`;
+  }
 };
 
-const saveSelectedSeatsData = () => {
-  console.log(selectedSeatsData.value);
+const finalizeBooking = async () => {
+  try {
+
+    if (searchResults.value.length === 0) {
+      console.error('Nincs kiválasztott repülőjegy.');
+      return;
+    }
+    const selectedFlight = searchResults.value[0];
+    console.log(selectedSeatsData.value)
+
+    const segedar = selectedFlight.price * selectedFlight.passenger
+
+    const response = await axios.post('https://localhost:7151/api/Jegykezeles', {
+      'megrendelo_nev': selectedFlight.user,
+      'Indulas_hely': selectedFlight.from,
+      'erkezes_hely': selectedFlight.to ,
+      'indulasido': selectedFlight.departure,
+      'utazok' : selectedFlight.passenger,
+      'osztaly' : selectedFlight.class,
+      'ar': segedar,
+      'erkezesido': selectedFlight.arrival,
+      'SorSzek' : selectedSeatsData.value
+    });
+
+
+    console.log('Booking successful:', response.data);
+    router.push("/")
+
+  } catch (error) {
+    console.error('Error finalizing booking:', error);
+  }
 };
+
+const isSeatBooked = (row, seatNumber, column) => {
+  const seat = `${row}, ${seatNumber}, ${column}`;
+  for (let index = 0; index < bookedSeats.value.length; index++) {
+    if (bookedSeats.value[index][0] == row && bookedSeats.value[index][1] == seatNumber && bookedSeats.value[index][2] == column ) {
+      return true
+    }
+  }
+};
+
+
+const isSelectedSeat = (row, seatNumber, column) => {
+  const seatIndex = (row - 1) * 30 + (column - 1) * 30 + seatNumber;
+  return selectedSeats.value.includes(seatIndex);
+};
+
 </script>
-
 
 <style scoped>
 .flight-search {
@@ -343,12 +430,13 @@ button {
   position: fixed;
   top: 0;
   right: 0;
-  width: 700px;
-  height: 100%;
+  width: 400px;
+  height: 90%;
   background-color: #f0e9e9;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 1000; 
-  padding: 20px;
+  padding: 40px;
+  overflow-y: auto;
 }
 
 .close-btn {
@@ -373,7 +461,7 @@ button {
 }
 
 .empty-column {
-  width: 40px; /* Üres oszlop szélessége */
+  width: 40px;
 }
 
 .column {
@@ -394,6 +482,14 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.unavailable {
+  background-color: #ccc; 
+  pointer-events: none; 
+}
+.selected {
+  background-color: rgb(76, 78, 76);
+  color: white;
 }
 
 </style>

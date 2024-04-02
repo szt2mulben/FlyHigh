@@ -1,6 +1,7 @@
 ﻿using FlyHighApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace FlyHighApi.Controllers
 {
@@ -30,6 +31,8 @@ namespace FlyHighApi.Controllers
         [HttpPost]
         public async Task<ActionResult<JegyekModel>> Postjegyek(JegyekModel jegyek)
         {
+            Debug.WriteLine(jegyek);
+
             if (_flyhighdbContext.jegyek == null)
             {
                 return Problem("Entity set 'flyhighdbContext.jegyek'  is null.");
@@ -37,7 +40,7 @@ namespace FlyHighApi.Controllers
             _flyhighdbContext.jegyek.Add(jegyek);
             await _flyhighdbContext.SaveChangesAsync();
 
-            return CreatedAtAction("Getjegyek", new { id = jegyek.jegy_id }, jegyek);
+            return CreatedAtAction("Postjegyek", new { id = jegyek.jegy_id }, jegyek);
         }
 
     }

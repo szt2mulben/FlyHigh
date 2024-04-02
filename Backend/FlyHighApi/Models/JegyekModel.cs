@@ -11,31 +11,31 @@ namespace FlyHighApi.Models
         public int jegy_id { get; set; }
 
         [StringLength(50)]
-        public string? megrendelo_nev { get; set; }
+        public string megrendelo_nev { get; set; } = null!;
 
         [StringLength(50)]
-        public string? Indulas_hely { get; set; }
+        public string Indulas_hely { get; set; } = null!;
 
         [StringLength(50)]
-        public string? erkezes_hely { get; set; }
+        public string erkezes_hely { get; set; } = null!;
 
         [StringLength(50)]
-        public string? indulasido { get; set; }
+        public string indulasido { get; set; } = null!;
 
         [Column(TypeName = "int(11)")]
         public int? utazok { get; set; }
 
         [StringLength(50)]
-        public string? osztaly { get; set; }
+        public string osztaly { get; set; } = null!;
 
         [Column(TypeName = "int(11)")]
-        public int? ar { get; set; }
+        public int? ar { get; set; } 
 
         [StringLength(50)]
-        public string? erkezesido { get; set; }
+        public string erkezesido { get; set; } = null!;
 
         [StringLength(50)]
-        public string? SorSzek { get; set; }
+        public string SorSzek { get; set; } = null!;
 
 
 
