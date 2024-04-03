@@ -1,22 +1,33 @@
 <template>
-  <div class="container">
-    <h2 v-if="!showRegisterForm">Bejelentkezés</h2>
+    <div class="font-[sans-serif] text-[#333]">
+  <div class="min-h-screen flex fle-col items-center justify-center py-6 px-4">
+    <div class="grid md:grid-cols-2 items-center gap-10 max-w-6xl w-full">
+      <div data-aos="fade-right" class="max-md:text-center">
+            <h2 class="lg:text-5xl text-4xl font-extrabold lg:leading-[55px]">
+              Üdvözöl téged a Flyhigh csapata!
+            </h2>
+            <p class="text-sm mt-6">Célunk hogy repülési élménye kimagasló legyen, hisz az Önök elégedettsége a szívügyünk! Jelentkezz be, hisz álomutazásod pár kattintsára...</p>
+          </div>
+
     <form v-if="!showRegisterForm">
-      <input type="text" v-model="loginData.name" placeholder="Felhasználónév" required>
-      <input type="password" v-model="loginData.password" placeholder="Jelszó" required>
-      <button type="submit" @click.prevent="login()">Bejelentkezés</button>
-      <p>Még nem regisztráltál? <a href="#" @click="showRegisterForm = true">Regisztráció</a></p>
+      <h2 v-if="!showRegisterForm" class="text-3xl font-extrabold mb-8 max-md:text-center">Bejelentkezés</h2>
+      <input type="text" v-model="loginData.name" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-600" placeholder="Felhasználónév" required>
+      <input type="password" v-model="loginData.password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-600" placeholder="Jelszó" required>
+      <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" @click.prevent="login()">Bejelentkezés</button>
+      <p class="py-2.5">Még nem regisztráltál? <a href="#" @click="showRegisterForm = true" class="font-bold	 text-blue-600 hover:text-blue-500">Regisztráció</a></p>
     </form>
 
-    <h2 v-if="showRegisterForm">Regisztráció</h2>
     <form v-if="showRegisterForm">
-      <input type="text" v-model="registerData.name" placeholder="Felhasználónév" required>
-      <input type="password" v-model="registerData.password" placeholder="Jelszó" required>
-      <input type="email" v-model="registerData.email" placeholder="E-mail:" required>
-      <button type="submit" @click="register()">Regisztráció</button>
-      <p>Már regisztráltál? <a href="#" @click="showRegisterForm = false">Bejelentkezés</a></p>
+      <h2 v-if="showRegisterForm" class="text-3xl font-extrabold mb-8 max-md:text-center">Regisztráció</h2>
+      <input type="text" v-model="registerData.name" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-600" placeholder="Felhasználónév" required>
+      <input type="password" v-model="registerData.password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-600" placeholder="Jelszó" required>
+      <input type="email" v-model="registerData.email" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-600" placeholder="E-mail:" required>
+      <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" @click="register()">Regisztráció</button>
+      <p class="py-2.5">Már regisztráltál? <a href="#" class="font-bold text-blue-600 hover:text-blue-500" @click="showRegisterForm = false">Bejelentkezés</a></p>
     </form>
   </div>
+  </div>
+</div>
 </template>
 
 <script setup>

@@ -12,6 +12,7 @@ const isLoggedIn = ref(!!user);
 
 </script>
 
+
 <template>
   <nav>
   <div v-if="isLoggedIn">
