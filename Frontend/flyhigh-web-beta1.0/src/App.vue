@@ -14,15 +14,10 @@ const isLoggedIn = ref(!!user);
 
 
 <template>
-  <nav>
-  <div v-if="isLoggedIn">
+  <div v-if="isLoggedIn" class="bg-gray-800">
     <div style="float: right;">
   <div class="dropdown" v-if="payload && user">
-    <span class="dropdown-toggle">Bejelentkezve <b>{{ user }}</b> néven.</span>
-    <div class="dropdown-menu" style="right: 0;">
-      <span @click="logout()" style="margin: 20px;">Kijelentkezés</span>
-      <RouterLink to="/sajatadatok">Saját adatok</RouterLink>
-    </div>
+    <span class="dropdown-toggle text-white">Bejelentkezve <b>{{ user }}</b> néven.</span>
   </div>
   <div class="dropdown" v-else>
     <span class="dropdown-toggle">Bejelentkezés</span>
@@ -36,25 +31,18 @@ const isLoggedIn = ref(!!user);
     <div class="dropdown">
     </div>
   </div>
-  </nav>
 
-  <nav class="bg-white border-gray-200 shadow ">
-  <div class="max-w-screen-2xl py-2.5 flex flex-wrap items-center justify-between mx-auto">
-    <a href="/jegyadatok" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="https://cdn.discordapp.com/attachments/919994217584013343/1225201951650877460/flyhigh_color_logo.png?ex=6620453c&is=660dd03c&hm=0bb848317b5ac2c41dc4b601aa48a87413b42b5f05e23ba15aa0b3e482723526&" class="h-12" alt="Flyhigh Logo" />
-    </a>
-    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
-    </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
-        <li>
-          <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page"><RouterLink to="/felhasznaloiadatok">Jogosultságok</RouterLink></a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">    <div class="dropdown">
+  <section class="relative mx-auto">
+    <nav class="flex justify-between bg-gray-900 text-white w-screen">
+      <div class="px-5 xl:px-12 py-6 flex w-full items-center">
+        <a class="text-3xl font-bold font-heading" href="/jegyadatok">
+          <!-- <img class="h-9" src="logo.png" alt="logo"> -->
+          Flyhigh
+        </a>
+        <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+          <li><a class="hover:text-gray-200" href="#"><RouterLink to="/jegyadatok">Kezdőlap</RouterLink></a></li>
+          <li><a class="hover:text-gray-200" href="#"><RouterLink to="/felhasznaloiadatok">Jogosultságok</RouterLink></a></li>
+          <li><a class="hover:text-gray-200" href="#"><div class="dropdown">
       <span class="dropdown-toggle">Légijáratok</span>
       <div class="dropdown-menu">
         <RouterLink to="/ujgep">Új GépAdatok</RouterLink>
@@ -62,18 +50,83 @@ const isLoggedIn = ref(!!user);
         <RouterLink to="">Repülőtér</RouterLink>
         <RouterLink to="">Repülőtársaság</RouterLink>
       </div>
-    </div></a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"><RouterLink to="/jegyadatok">Jegyek</RouterLink></a>
-        </li>
+    </div></a></li>
+        </ul>
+        <div class="hidden xl:flex items-center space-x-5 items-center">
+          <a class="dropdown flex items-center hover:text-gray-200" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dropdown-toggle hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+      <div class="dropdown-menu">
+        <span class="text-black" @click="logout()" style="margin: 20px;">Kijelentkezés</span>
+      <RouterLink to="/sajatadatok">Saját adatok</RouterLink></div>
+          </a>
+          
+          <a class="flex items-center hover:text-gray-200" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            <span class="flex absolute -mt-5 ml-4">
+              <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
+                </span>
+              </span>
+          </a>
+        </div>
+      </div>
+      <a class="xl:hidden flex mr-6 items-center" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <span class="flex absolute -mt-5 ml-4">
+          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
+          </span>
+        </span>
+      </a>
+      <a class="navbar-burger self-center mr-12 xl:hidden" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+      </a>
+    </nav>
+  </section>
 
-      </ul>
-    </div>
-  </div>
-</nav>
 
   <RouterView />
+
+  <div class=" bg-gray-900">
+    <div class="max-w-2xl mx-auto text-white py-10">
+        <div class="text-center">
+            <h3 class="text-3xl mb-3"> Próbáltad már Appjainkat? </h3>
+            <p> Flyhigh - Flight Solutions. </p>
+            <div class="flex justify-center my-10">
+                <div class="flex items-center border w-auto rounded-lg px-4 py-2 w-52 mx-2">
+                    <img src="https://cdn-icons-png.flaticon.com/512/888/888857.png" class="w-7 md:w-8">
+                    <div class="text-left ml-3">
+                        <p class='text-xs text-gray-200'>Download on </p>
+                        <p class="text-sm md:text-base"> Google Play Store </p>
+                    </div>
+                </div>
+                <div class="flex items-center border w-auto rounded-lg px-4 py-2 w-44 mx-2">
+                    <img src="https://cdn-icons-png.flaticon.com/512/888/888841.png" class="w-7 md:w-8">
+                    <div class="text-left ml-3">
+                        <p class='text-xs text-gray-200'>Download on </p>
+                        <p class="text-sm md:text-base"> Apple Store </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
+            <p class="order-2 md:order-1 mt-8 md:mt-0"> &copy; Flyhigh, 2024. </p>
+            <div class="order-1 md:order-2">
+                <span class="px-2">Rólunk</span>
+                <span class="px-2 border-l">Kapcsolat</span>
+                <span class="px-2 border-l">Adatkezelés</span>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <style scoped>
@@ -84,7 +137,6 @@ const isLoggedIn = ref(!!user);
 
 .dropdown-toggle {
   cursor: pointer;
-  margin-right: 20px;
 }
 
 .dropdown-menu {
