@@ -1,8 +1,6 @@
 <template>
-
-<div v-if="!bookingCompleted"></div>
-  <div v-if="!bookingCompleted" class=" bg-gray-100 p-0 sm:p-12">
-  <div class="flight-search px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl">
+  <div  class=" bg-gray-100 pb-6 sm:p-12">
+  <div v-if="!bookingCompleted" class="flight-search px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl">
     <h1 class="text-2xl font-bold mb-8">Repülőjegy foglalás</h1>
     <div id="form flight-search" novalidate>
       <div class="relative z-0 w-full mb-5">
@@ -79,8 +77,8 @@
       </button>
     </div>
   </div>
+  <h2 v-if="bookingCompleted" class="text-4xl pt-2 font-bold mb-8 text-center">Jegyek</h2>
     <div v-if="searchResults.length > 0 " class="flight-search bg-white rounded-xl shadow-lg">
-      <h2 v-if="bookingCompleted">Adatok:</h2>
       <div class="p-10" v-for="(flight, index) in searchResults" :key="index">
   <div class="max-w-full  bg-white flex flex-col rounded overflow-hidden shadow-lg" data-aos="fade-up">
     <div class="flex flex-row items-baseline flex-nowrap bg-gray-100 p-2">
@@ -134,71 +132,122 @@
   </div>
 </div>
     </div>
-    <div v-if="bookingCompleted">
-      <h2>Utas adatok</h2>
-      <div class="passenger-info">
-        <div v-for="(passenger, index) in passengerCount" :key="index">
-          <h3>{{ index + 1 }}. utas adatai:</h3>
-          <div class="field">
-            <select>
-              <option value="male">Férfi</option>
-              <option value="female">Nő</option>
-            </select>
-          </div>
-          <div class="field">
-            <input type="text" placeholder="Vezetéknév">
-          </div>
-          <div class="field">
-            <input type="text" placeholder="Keresztnév">
-          </div>
-          <div class="field">
-            <input type="date" placeholder="Születési dátum:">
-          </div>
+    <div v-if="bookingCompleted" class="min-h-screen bg-gray-100 flight-search">
+  <div class="mx-auto px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl">
+    <h1 class="text-2xl font-bold mb-8">Rendelési információk</h1>
+   <div v-for="(passenger, index) in passengerCount" :key="index"> 
+   <h3 class="text-xl font-bold mb-8">{{ index + 1 }}. utas adatai:</h3>
+	<div id="form" novalidate>
+      <div class="relative z-0 w-full mb-5">
+        <input
+          type="text" placeholder=" "
+          required
+          class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+        />
+        <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Vezetéknév</label>
+      </div>
+	 <div>
+	  
+	  <div class="relative z-0 w-full mb-5">
+        <input
+          type="text" placeholder=" "
+          required
+          class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+        />
+        <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Keresztnév</label>
+      </div>
+
+      <div class="flex flex-row space-x-4">
+        <div class="relative z-0 w-full mb-5">
+          <input
+            type="text"
+            name="date"
+            placeholder=" "
+            onclick="this.setAttribute('type', 'date');"
+            class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+          />
+          <label for="date" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Dátum</label>
         </div>
       </div>
-      <h2>Számlázási adatok</h2>
+  </div>
+</div>
+</div>
+      <h3 class="text-xl font-bold mb-8">Számlázási Adatok</h3>
       <div class="billing-info">
-        <div class="field">
-          <input type="text" id="billingName" placeholder="Számlázási név">
-        </div>
-        <div class="field">
-          <select id="billingCountry">
+
+        <div class="relative z-0 w-full mb-5">
+        <input
+        type="text" id="billingName" placeholder=" "
+          required
+          class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+        />
+        <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Számlázási név</label>
+      </div>
+
+      <div class="relative z-0 w-full mb-5 border-0 border-b-2 appearance-none">
+        <select id="billingCountry">
             <option value="Hungary">Magyarország</option>
             <option value="Hungary">Románia</option>
             <option value="Hungary">Bulgária</option>
             <option value="Hungary">Csehország</option>
             <option value="Hungary">Ausztria</option>
           </select>
-        </div>
-        <div class="field">
-          <input type="number" id="billingZip" placeholder="Irányítószám">
-        </div>
-        <div class="field">
-          <input type="text" id="billingCity" placeholder="Település">
-        </div>
-        <div class="field">
-          <input type="text" id="billingAddress" placeholder="Cím">
-        </div>
       </div>
-      <h2>Fizetési mód</h2>
+
+      <div class="relative z-0 w-full mb-5">
+        <input
+        type="text" id="billingZip" placeholder=" "
+          required
+          class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+        />
+        <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Irányítószám</label>
+      </div>
+
+      <div class="relative z-0 w-full mb-5">
+        <input
+        type="text" id="billingCity" placeholder=" "
+          required
+          class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+        />
+        <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Város</label>
+      </div>
+
+      <div class="relative z-0 w-full mb-5">
+        <input
+        type="text" id="billingAddress" placeholder=" "
+          required
+          class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+        />
+        <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Lakcím</label>
+      </div>
+      </div>
+      <h3 class="text-xl font-bold mt-6 mb-8">Fizetési mód</h3>
       <div class="payment-method">
-        <h3 class="payment-heading"><input type="checkbox">Bankkártyás fizetés</h3>
+        <h3 class="text-base"><input type="checkbox"> Bankkártyás fizetés</h3>
         <div class="payment-details">
-          <p class="payment-info">A foglalás véglegesítésével egy biztonságos kártyaelfogadó oldalra irányítjuk, ahol a kártyaadatok megadásával egyszerűen kifizetheti repülőjegyét. Minden további teendőről és részletes információról, a fizetést követő visszaigazoló emailben tájékozódhat.</p>
-          <p class="payment-info">Kérjük ne felejtse el megerősíteni fizetését mobileszközén! (3DS Authentication)</p>
-          <p class="payment-info">Figyelem: a sikeres fizetéssel a repülőjegy automatikusan kiállításra kerül és ezt követően már csak a légitársaság szabályainak megfelelően módosítható!</p>
+          <p>A foglalás véglegesítésével egy biztonságos kártyaelfogadó oldalra irányítjuk, ahol a kártyaadatok megadásával egyszerűen kifizetheti repülőjegyét. Minden további teendőről és részletes információról, a fizetést követő visszaigazoló emailben tájékozódhat.</p>
+          <p>Kérjük ne felejtse el megerősíteni fizetését mobileszközén! (3DS Authentication)</p>
+          <br><p><b>Figyelem:</b> a sikeres fizetéssel a repülőjegy automatikusan kiállításra kerül és ezt követően már csak a légitársaság szabályainak megfelelően módosítható!</p>
         </div>
       </div>
-      <h2>Ülőhely-választó</h2>
+      <h2 class="text-xl font-bold mt-6 mb-8">Ülőhely-választó</h2>
       <div>
-        <p>Foglalja le az Önnek megfelelő helyet a repülőgépen, így elkerülheti a légitársaság automatikus helyválasztását!</p>
-        <button @click="toggleSeatSelector">Ülőhely kiválasztás</button>
+        <p class="border-0 border-b-2 appearance-none">Foglalja le az Önnek megfelelő helyet a repülőgépen, így elkerülheti a légitársaság automatikus helyválasztását!</p>
+        <button @click="toggleSeatSelector"
+        class="w-50 px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none">
+      Ülőhely kiválasztás
+      </button>
       </div>
-      <button @click="finalizeBooking">Véglegesítés</button>
+      <div class="mt-4">
+      <button @click="finalizeBooking" class="w-full mt-10 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none">Véglegesítés</button>
+    </div>
       <transition name="slide">
       <div v-if="showSeatSelector" class="seat-selector">
-        <button class="close-btn" @click="toggleSeatSelector">X</button>
-        <h2>Kérlek válassz széket:</h2>
+        <button class="close-btn" @click="toggleSeatSelector"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</button>
+        <h2 class="text-xl font-bold mt-6 mb-8">Kérlek válassz széket:</h2>
         <div class="plane-seats">
           <div class="left-column">
             <div class="column" v-for="row in 2" :key="row">
@@ -232,6 +281,7 @@
     </transition>    
    </div>
   </div>
+</div>
 
   <div class="flight-search">
     <h1 class="font-bold text-center text-4xl text-gray-600">Nem tudod hova utazz?</h1>
@@ -571,10 +621,7 @@ button {
   top: 10px;
   right: 10px;
   padding: 5px 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+  background-color: #1a222b;
   cursor: pointer;
 }
 
