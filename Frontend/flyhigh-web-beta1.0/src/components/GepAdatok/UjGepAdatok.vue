@@ -1,19 +1,40 @@
 <template> 
-     <div>
-    <h1>Gép felvétele:</h1>
-    <div class="gep-container">
-      <div class="gep-card">
-        <div class="info">
-          <p><span>Gép neve:</span> <input type="text" v-model="nev"></p>
-          <p><span>Foglalt turista:</span> <input type="text" v-model="fturista"></p>
-          <p><span>Foglalt elsőosztály:</span> <input type="text" v-model="fElso"></p>
-          <p><span>ELsőosztály ulohelyek:</span> <input type="text" v-model="Eulo"></p>
-          <p><span>Turistaulohelyek:</span> <input type="text" v-model="Tulo"></p>
-          <button @click="saveData()">Mentés</button>
-        </div>
+  <div class=" bg-gray-100 p-0 sm:p-12">
+  <div class="mx-auto max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl flight-search">
+    <h1 class="text-2xl font-bold mb-8">Gép felvétele</h1>
+    <div id="form" novalidate>
+      <div class="relative z-0 w-full mb-5">
+        <input type="text" v-model="nev" placeholder="Gép neve" class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
       </div>
-    </div>
+     </div>
+
+     <div id="form" novalidate>
+      <div class="relative z-0 w-full mb-5">
+        <input type="text" v-model="fturista" placeholder="Foglaló neve" class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
+      </div>
+     </div>
+
+     <div id="form" novalidate>
+      <div class="relative z-0 w-full mb-5">
+        <input type="text" v-model="fElso" placeholder="Foglalt elsőosztály" class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
+      </div>
+     </div>
+
+     <div id="form" novalidate>
+      <div class="relative z-0 w-full mb-5">
+        <input type="text" v-model="Eulo" placeholder="Első osztály ülőhelyek:" class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
+      </div>
+     </div>
+
+     <div id="form" novalidate>
+      <div class="relative z-0 w-full mb-5">
+        <input type="text" v-model="Tulo" placeholder="Turista ülőhelyek:" class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
+      </div>
+     </div>
+     <button class="w-full mt-4 p-1 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-blue-600 hover:bg-pink-600 hover:shadow-lg focus:outline-none" @click="saveData()">Mentés</button>
   </div>
+</div>
+
   </template>
   
   <script setup>
