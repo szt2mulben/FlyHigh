@@ -1,47 +1,75 @@
 <template> 
-  <h1>Gépek Adatai:</h1>
-  <div class="search-container">
-    <p>Keresési kritérium:(Gép neve)</p>
-    <input type="text" v-model="kereses" @input="keresesValtozas()" placeholder="Keresés..." id="teszt">
-  </div>
-  <div class="gep-container">
-    <div v-for="gepek in megjelenitettGepadatok" :key="gepek.id" class="gep-card">
-      <div class="info">
-        <p><span>Gép neve:</span> {{gepek.gepneve}}</p>
-        <p><span>Foglalt turista:</span> {{gepek.foglaltturista}}</p>
-        <p><span>Foglalt elsőosztály:</span> {{gepek.foglalt1oszt}}</p>
-        <p><span>ELsőosztály ulohelyek:</span> {{gepek.elsoosztulohelyek}}</p>
-        <p><span>Turistaulohelyek:</span> {{gepek.turistaulohelyek}}</p>
-        <!-- Gombok csak adminisztrátor esetén jelennek meg -->
-        <p v-if="currentUserPermission === 'Admin'">
-          <button @click="deletegep(gepek.id)">Törlés</button>
-          <button @click="showEditModal(gepek)">Módosítás</button>
-        </p>
+
+<div class="bg-gray-100 p-0 sm:p-12">
+  <div class="mx-auto max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl flight-search">
+    <h1 class="text-2xl font-bold mb-8">Gépek Adatai</h1>
+    <div id="form" novalidate>
+      <div class="relative z-0 w-full mb-5">
+        <input type="text" v-model="kereses" @input="keresesValtozas()" placeholder="Keresés..." id="teszt" class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
       </div>
     </div>
   </div>
-  
+</div>
+
+<div class="flex items-center justify-center mb-16 bg-gray-100" >
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+        <div v-for="gepek in megjelenitettGepadatok" :key="gepek.id" class="relative bg-white py-6 px-6 rounded-3xl w-64 shadow-xl">
+            <div class="mt-8">
+                <p class="text-xl font-semibold my-2">{{gepek.gepneve}}</p>
+                <div class="flex space-x-2 text-gray-400 text-sm">
+                  <p>Foglalt túrista hely:</p>
+
+                     <p>{{gepek.foglaltturista}}</p> 
+                </div>
+                <div class="flex space-x-2 text-gray-400 text-sm my-3">
+                    <p>Túrista ülőhelyek:</p>
+                     <p>{{gepek.turistaulohelyek}}</p> 
+                </div>
+                <div class="border-t-2"></div>
+
+                <div class="flex justify-between">
+                    <div class="my-2">
+                        <p class="font-semibold text-base mb-2">Első osztály ülőhelyek: <br> {{gepek.foglalt1oszt}}</p>
+                        <div class="flex space-x-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="my-2">
+                        <p class="font-semibold text-base mb-2">Első osztály foglalt helyek: {{gepek.elsoosztulohelyek}}</p>
+                        <div v-if="currentUserPermission === 'Admin'" class="text-base text-gray-400 font-semibold flex justify-between">
+                          <p class="font-bold text-gray-600"><button @click="showEditModal(user)">Módosítás</button></p>
+                        
+                        <div class="text-base text-gray-400 font-semibold">
+                            <p class="text-red-400"><button @click="deleteuser(user.id)">Törlés</button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
   <div id="editModal" class="modal">
     <div class="modal-content">
       <span class="close" @click="hideEditModal">&times;</span>
-      <h2>Módosítás</h2>
+      <h2 class="font-bold pb-2">Módosítás</h2>
       <form @submit.prevent="saveChanges">
-        <label for="editedGepneve">Gép neve:</label>
-        <input type="text" id="editedGepneve" v-model="editedGep.gepneve" required> <br>
+        <label for="editedGepneve">Gép neve: </label>
+        <input class="border-2 border-gray-400 rounded-xl m-2" type="text" id="editedGepneve" v-model="editedGep.gepneve" required> <br>
 
         <label for="editedFoglaltturista">Foglalt turista:</label>
-        <input type="number" id="editedFoglaltturista" v-model="editedGep.foglaltturista" required><br>
+        <input class="border-2 border-gray-400 rounded-xl m-1" type="number" id="editedFoglaltturista" v-model="editedGep.foglaltturista" required><br>
 
         <label for="editedFoglalt1oszt">Foglalt elsőosztály:</label>
-        <input type="number" id="editedFoglalt1oszt" v-model="editedGep.foglalt1oszt" required><br>
+        <input class="border-2 border-gray-400 rounded-xl m-1" type="number" id="editedFoglalt1oszt" v-model="editedGep.foglalt1oszt" required><br>
 
         <label for="editedElsoosztulohelyek">Első osztályú ülések:</label>
-        <input type="number" id="editedElsoosztulohelyek" v-model="editedGep.elsoosztulohelyek" required><br>
+        <input class="border-2 border-gray-400 rounded-xl m-1" type="number" id="editedElsoosztulohelyek" v-model="editedGep.elsoosztulohelyek" required><br>
 
         <label for="editedTuristaulohelyek">Turista ülések:</label>
-        <input type="number" id="editedTuristaulohelyek" v-model="editedGep.turistaulohelyek" required><br>
+        <input class="border-2 border-gray-400 rounded-xl m-1" type="number" id="editedTuristaulohelyek" v-model="editedGep.turistaulohelyek" required><br>
 
-        <button type="submit">Mentés</button>
+        <button class="bg-gray-500 hover:bg-gray-700 mt-4 text-white font-bold py-2 px-4 rounded-full" type="submit">Mentés</button>
       </form>
     </div>
   </div>

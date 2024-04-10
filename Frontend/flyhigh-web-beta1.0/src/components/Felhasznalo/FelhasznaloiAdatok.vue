@@ -65,16 +65,16 @@
       <h2 class="font-bold pb-2">Módosítás</h2>
       <form @submit.prevent="saveChanges">
         <label for="editedName">Név: </label>
-        <input type="text" id="editedName" v-model="editeduser.name" required> <br>
+        <input class="border-2 border-gray-400 rounded-xl m-1" type="text" id="editedName" v-model="editeduser.name" required> <br>
 
         <label for="editedPassword">Jelszó: </label>
-        <input type="text" id="editedPassword" v-model="editeduser.password" required><br>
+        <input class="border-2 border-gray-400 rounded-xl m-1" type="text" id="editedPassword" v-model="editeduser.password" required><br>
 
         <label for="editedEmail">Email: </label>
-        <input type="text" id="editedEmail" v-model="editeduser.email" required><br>
+        <input class="border-2 border-gray-400 rounded-xl m-1" type="text" id="editedEmail" v-model="editeduser.email" required><br>
 
         <label for="editedPermission">Jogosultság: </label>
-        <input type="text" id="editedPermission" v-model="editeduser.permission" required><br>
+        <input class="border-2 border-gray-400 rounded-xl m-1" type="text" id="editedPermission" v-model="editeduser.permission" required><br>
   
         <button class="bg-gray-500 hover:bg-gray-700 mt-4 text-white font-bold py-2 px-4 rounded-full" type="submit">Mentés</button>
       </form>
