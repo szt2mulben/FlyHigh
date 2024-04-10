@@ -62,21 +62,21 @@
   <div id="editModal" class="modal">
     <div class="modal-content">
       <span class="close" @click="hideEditModal">&times;</span>
-      <h2>Módosítás</h2>
+      <h2 class="font-bold pb-2">Módosítás</h2>
       <form @submit.prevent="saveChanges">
-        <label for="editedName">Név:</label>
+        <label for="editedName">Név: </label>
         <input type="text" id="editedName" v-model="editeduser.name" required> <br>
 
-        <label for="editedPassword">Jelszó:</label>
+        <label for="editedPassword">Jelszó: </label>
         <input type="text" id="editedPassword" v-model="editeduser.password" required><br>
 
-        <label for="editedEmail">Email:</label>
+        <label for="editedEmail">Email: </label>
         <input type="text" id="editedEmail" v-model="editeduser.email" required><br>
 
-        <label for="editedPermission">Jogosultság:</label>
+        <label for="editedPermission">Jogosultság: </label>
         <input type="text" id="editedPermission" v-model="editeduser.permission" required><br>
   
-        <button type="submit">Mentés</button>
+        <button class="bg-gray-500 hover:bg-gray-700 mt-4 text-white font-bold py-2 px-4 rounded-full" type="submit">Mentés</button>
       </form>
     </div>
   </div>
