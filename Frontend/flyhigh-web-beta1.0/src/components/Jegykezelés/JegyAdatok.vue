@@ -1,5 +1,6 @@
 <template>
-  <div  class=" bg-gray-100 pb-6 sm:p-12">
+  <div class=" bg-gray-100 pb-6 sm:p-12">
+    <h2 class="text-4xl pt-2 font-bold mb-8 text-center" data-aos="fade-down">Utazni készülsz? Segítünk!</h2>
   <div v-if="!bookingCompleted" class="flight-search px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl">
     <h1 class="text-2xl font-bold mb-8">Repülőjegy foglalás</h1>
     <div id="form flight-search" novalidate>

@@ -1,6 +1,7 @@
 <template> 
 
 <div class="bg-gray-100 p-0 sm:p-12">
+  <h2 class="text-4xl pt-2 font-bold mb-8 text-center" data-aos="fade-down">Gépek adatai</h2>
   <div class="mx-auto max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl flight-search">
     <h1 class="text-2xl font-bold mb-8">Gépek Adatai</h1>
     <div id="form" novalidate>

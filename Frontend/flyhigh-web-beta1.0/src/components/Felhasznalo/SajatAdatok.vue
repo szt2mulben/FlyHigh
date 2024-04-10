@@ -1,5 +1,5 @@
 <template> 
-  <h2 class="text-4xl pt-2 font-bold mb-8 text-center">Személyes adatok</h2>
+  <h2 class="text-4xl pt-4 font-bold mb-8 text-center" data-aos="fade-down">Személyes adatok</h2>
   <div class=" flex justify-center mb-16 ">
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
         <div v-for="user in sajatadat" class="relative bg-white py-6 px-6 rounded-3xl w-64 shadow-xl">
