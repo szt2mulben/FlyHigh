@@ -1,31 +1,64 @@
 <template> 
-  <h1>Felhasznalói adatok(Admin)</h1>
-  <div class="search-container">
-    <label for="search">Keresés felhasználók között:</label>
-    <input type="text" id="search" v-model="searchTerm" @input="searchUsers">
-    <div>
-    <label for="permissions">Jogosultság kiválasztása:</label>
-    <select id="permissions" v-model="selectedPermission" @change="searchUsers">
+<div class=" bg-gray-100 p-0 sm:p-12">
+  <div class="mx-auto max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl flight-search">
+    <h1 class="text-2xl font-bold mb-8">Felhasznalói adatok(Admin)</h1>
+    <div id="form" novalidate>
+      <div class="relative z-0 w-full mb-5">
+        <input type="text" id="search" v-model="searchTerm" @input="searchUsers" placeholder="Keresés felhasználók között" class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
+
+        <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500"></label>
+      </div>
+
+      <div class="relative z-0 w-full mb-5">
+        <label for="email" class="absolute duration-300  origin-0 text-gray-500">Jogosultság kiválasztása  <select id="permissions" v-model="selectedPermission" @change="searchUsers">
       <option value="">Mind</option>
       <option v-for="permission in permissions" :value="permission">{{ permission }}</option>
-    </select>
-  </div>
-  </div>
-  <div class="gep-container">
-    <div v-for="user in megjelenitettuserek" :key="user.id" class="gep-card">
-      <div class="info">
-        <p><span>Név:</span> {{user.name}}</p>
-        <p><span>Jelszó:</span> ********</p>
-        <p><span>Email:</span> {{user.email}}</p>
-        <p><span>Jogosultság:</span> {{user.permission}}</p>
-        <p>
-          <button @click="deleteuser(user.id)">Törlés</button>
-          <button @click="showEditModal(user)">Módosítás</button>
-        </p> 
+    </select></label>
       </div>
     </div>
   </div>
-  
+</div>
+
+  <div class="flex items-center justify-center mb-16 bg-gray-100 ">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+        <div v-for="user in megjelenitettuserek" :key="user.id" class="relative bg-white py-6 px-6 rounded-3xl w-64 shadow-xl">
+            <div class="mt-8">
+                <p class="text-xl font-semibold my-2">{{user.name}}</p>
+                <div class="flex space-x-2 text-gray-400 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                   </svg>
+
+                     <p>{{user.email}}</p> 
+                </div>
+                <div class="flex space-x-2 text-gray-400 text-sm my-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+                   </svg>
+                     <p>Jelszó rejtve</p> 
+                </div>
+                <div class="border-t-2"></div>
+
+                <div class="flex justify-between">
+                    <div class="my-2">
+                        <p class="font-semibold text-base mb-2">Jogosultság</p>
+                        <div class="flex space-x-2">
+                      <p class="font-bold text-gray-600"><button @click="showEditModal(user)">Módosítás</button></p>
+                        </div>
+                    </div>
+                     <div class="my-2">
+                        <p class="font-semibold text-base mb-2">{{user.permission}}</p>
+                        <div class="text-base text-gray-400 font-semibold">
+                            <p class="text-red-400"><button @click="deleteuser(user.id)">Törlés</button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
   <div id="editModal" class="modal">
     <div class="modal-content">
       <span class="close" @click="hideEditModal">&times;</span>
@@ -188,5 +221,11 @@ const saveChanges = async () => {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.flight-search {
+  max-width: 75%;
+  margin: 0 auto;
+  margin-top:50px;
 }
 </style>
