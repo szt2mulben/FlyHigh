@@ -1,5 +1,6 @@
 ﻿using FlyHighApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlyHighApi.Controllers
 {
@@ -18,13 +19,13 @@ namespace FlyHighApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<JegyekModel>>> Getrepterek()
+        public async Task<ActionResult<IEnumerable<RepuloterModels>>> Getrepterek()
         {
-            if (_flyhighdbContext.jegyek == null)
+            if (_flyhighdbContext.repuloterek == null)
             {
                 return NotFound();
             }
-            return await _flyhighdbContext.jegyek.ToListAsync();
+            return await _flyhighdbContext.repuloterek.ToListAsync();
         }
 
 

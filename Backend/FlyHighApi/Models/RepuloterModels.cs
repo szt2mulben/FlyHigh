@@ -1,6 +1,22 @@
-﻿namespace FlyHighApi.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FlyHighApi.Models
 {
-    public class RepuloterModels
+    [Table("repuloter")]
+
+    public partial class RepuloterModels
     {
+        [Key]
+        [Column(TypeName = "int(11)")]
+        public int Id { get; set; }
+
+        [StringLength(50)]
+        public string LastName { get; set; } = null!;
+
+        public DateTime BirthsDay { get; set; }
+
+        [StringLength(50)]
+        public string Country { get; set; } = null!;
     }
 }

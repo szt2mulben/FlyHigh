@@ -21,6 +21,9 @@ namespace FlyHighApi.Models
         public virtual DbSet<JegyekModel> jegyek { get; set; } = null!;
         public virtual DbSet<JegyAdatokModel> jegyadatok { get; set; }
 
+        public virtual DbSet<RepuloterModels> repuloterek { get; set; }
+
+
 
 
 
