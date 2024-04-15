@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 03. 19:46
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Létrehozás ideje: 2024. Ápr 15. 13:26
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -181,6 +181,29 @@ INSERT INTO `orszagok` (`Id`, `Orszag_nev`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `repuloter`
+--
+
+CREATE TABLE `repuloter` (
+  `Id` int(11) NOT NULL,
+  `LastName` varchar(50) DEFAULT NULL,
+  `BirthsDay` varchar(50) DEFAULT NULL,
+  `Country` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `repuloter`
+--
+
+INSERT INTO `repuloter` (`Id`, `LastName`, `BirthsDay`, `Country`) VALUES
+(1, 'John F. Kennedy International Airport', '1990-05-30', 'USA'),
+(3, 'Toronto Pearson International Airport', '1978-12-05', 'Canada'),
+(4, 'Sydney Airport', '1992-04-10', 'Australia'),
+(5, 'Auckland Airport', '1989-06-25', 'New Zealand');
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `userdata`
 --
 
@@ -228,6 +251,12 @@ ALTER TABLE `jegyek`
 -- A tábla indexei `orszagok`
 --
 ALTER TABLE `orszagok`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- A tábla indexei `repuloter`
+--
+ALTER TABLE `repuloter`
   ADD PRIMARY KEY (`Id`);
 
 --
