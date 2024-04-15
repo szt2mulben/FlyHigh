@@ -296,31 +296,30 @@
                              ul.insertAdjacentHTML('afterend', ul.outerHTML);
                              ul.nextSibling.setAttribute('aria-hidden', 'true');
                          })" class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-                         <ul x-ref="logos" class="grayscale flex items-center justify-center md:justify-start [&amp;_li]:mx-8 [&amp;_img]:max-w-[150px] animate-infinite-scroll">
+                         <ul x-ref="logos" class="grayscale flex  items-center justify-center md:justify-start [&amp;_li]:mx-8 [&amp;_img]:max-w-[150px] animate-infinite-scroll">
                              <li>
-                                 <img src="../../assets/Images/luft.png" alt="Facebook">
+                                 <img src="../../assets/Images/luft.png" alt="luft">
                              </li>
                              <li>
-                                 <img src="../../assets/Images/airbaltic.png" alt="Disney">
+                                 <img src="../../assets/Images/airbaltic.png" alt="airbaltic">
                              </li>
                              <li>
-                                <img src="../../assets/Images/korean.png" alt="Samsung">
+                                <img  src="../../assets/Images/korean.png" alt="korean">
                             </li>
                              <li>
-                                 <img src="../../assets/Images/turkish.png" alt="Spark">
-                             </li>
-                         </ul><ul x-ref="logos" class="grayscale flex items-center justify-center md:justify-start [&amp;_li]:mx-8 [&amp;_img]:max-w-[150px] animate-infinite-scroll" aria-hidden="true">
-                             <li>
-                                 <img src="../../assets/Images/luft.png" alt="Facebook">
+                                 <img src="../../assets/Images/turkish.png" alt="turkish">
                              </li>
                              <li>
-                                 <img src="../../assets/Images/luft.png" alt="Disney">
+                                 <img class="w-24" src="../../assets/Images/alitalia.png" alt="alitalia">
                              </li>
                              <li>
-                                <img src="../../assets/Images/luft.png" alt="Samsung">
+                                 <img class="w-24" src="../../assets/Images/dutch.png" alt="dutch">
+                             </li>
+                             <li>
+                                <img class="w-24" src="../../assets/Images/americanairlines.png" alt="americanairlines">
                             </li>
                              <li>
-                                 <img src="../../assets/Images/luft.png" alt="Spark">
+                                 <img class="w-24" src="../../assets/Images/wizzair.png" alt="wizzair">
                              </li>
                          </ul>                
                      </div>
