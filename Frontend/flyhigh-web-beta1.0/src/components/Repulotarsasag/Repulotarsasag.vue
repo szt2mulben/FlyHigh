@@ -141,4 +141,11 @@
       }
     };
     </script>
+    <style scoped>
+    .gep-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  </style>
     
