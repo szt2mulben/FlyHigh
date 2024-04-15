@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import GepAdatokView from '../views/GepAdatokView.vue'
 import LoginRegister from '../components/LoginRegister/Login.vue';
 import KezdolapView from '../views/KezdolapView.vue'
+import Repulotarsasag from '../components/Repulotarsasag/Repulotarsasag.vue'
 
 
 
@@ -46,6 +47,12 @@ const router = createRouter({
       name: 'loginregister',
       component: LoginRegister,
       meta: { requiresAuth: false }
+    },
+    {
+      path: '/repuloterek',
+      name: 'repuloterek',
+      component: () => import('../components/Repulotarsasag/Repulotarsasag.vue'),
+      meta: { requiresAuth: true, roles: ['Admin', 'Ugyfel'] }
     },
     {
       path: '/ujgep',
