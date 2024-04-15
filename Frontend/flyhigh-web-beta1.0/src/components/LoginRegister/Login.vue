@@ -1,5 +1,43 @@
 <template>
-    <div class="font-[sans-serif] text-[#333]">
+
+  <div v-if="!showHome == true" class="relative flex flex-col-reverse py-16 lg:pt-0 lg:flex-col lg:pb-0">
+    <div class="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
+      <svg class="absolute left-0 hidden h-full text-white transform -translate-x-1/2 lg:block" viewBox="0 0 100 100" fill="currentColor" preserveAspectRatio="none slice">
+        <path d="M50 0H100L50 100H0L50 0Z"></path>
+      </svg>
+      <img
+        class="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
+        src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+        alt=""
+      />
+    </div>
+    <div class="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl">
+      <div class="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
+        <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+          Flyhigh - Flight Solutions
+        </p>
+        <h2 class="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+          Minden út egy kaland <br class="hidden md:block" /> -
+          hadd legyenünk a vezetőid!
+        </h2>
+        <p class="pr-5 mb-5 text-base text-gray-700 md:text-lg">
+          2023 óta a piacon, azért hogy ügyfeleink kényelmesen foglaljanak repülőjegyet kedvenc úticélukhoz.
+        </p>
+        <div class="flex items-center">
+          <a
+          @click="showHomes(); showHome = true"
+           
+            class="bg-blue-400 text-white inline-flex items-center h-12 px-6 mr-6 font-medium tracking-wide  rounded shadow-md"
+          >
+            Jegyvásárlás
+        </a>
+          <a target="_blank" href="https://booking.com" aria-label="" class="inline-flex items-center font-semibold">Hotelek</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div v-if="showHome == true" class="font-[sans-serif] text-[#333]">
   <div class="min-h-screen flex fle-col items-center justify-center py-6 px-4">
     <div class="grid md:grid-cols-2 items-center gap-10 max-w-6xl w-full">
       <div data-aos="fade-right" class="max-md:text-center">
@@ -14,7 +52,7 @@
       <input type="text" v-model="loginData.name" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-600" placeholder="Felhasználónév" required>
       <input type="password" v-model="loginData.password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-600" placeholder="Jelszó" required>
       <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" @click.prevent="login()">Bejelentkezés</button>
-      <p class="py-2.5">Még nem regisztráltál? <a href="#" @click="showRegisterForm = true" class="font-bold	 text-blue-600 hover:text-blue-500">Regisztráció</a></p>
+      <p class="py-2.5">Még nem regisztráltál? <a href="#" @click="showRegisterForm = true" class="font-bold text-blue-600">Regisztráció</a></p>
     </form>
 
     <form v-if="showRegisterForm">
@@ -46,6 +84,7 @@ const registerData = {
   email: '',
 };
 const showRegisterForm = ref(false);
+const showHome = ref(false);
 
 const login = async () => {
   try {
@@ -86,6 +125,15 @@ const register = async () => {
   } catch (error) {
     console.error('Hiba:', error);
   }
+};
+
+const showHomes = async () => {
+
+    if (showHome.value == true) {
+      showHome.value = true;
+    } else {
+      console.log('Hiba: Sikertelen beléptetés');
+    }
 };
 </script>
 
@@ -135,7 +183,6 @@ button:hover {
 
 a {
   text-decoration: none;
-  color: #007bff;
 }
 
 a:hover {
