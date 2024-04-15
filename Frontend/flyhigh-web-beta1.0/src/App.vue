@@ -52,24 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <template>
-  <div v-if="isLoggedIn" class="bg-gray-800">
-    <div style="float: right;">
-  <div class="dropdown" v-if="payload && user">
-    <span class="dropdown-toggle text-white">Bejelentkezve <b>{{ user }}</b> néven.</span>
-  </div>
-  <div class="dropdown" v-else>
-    <span class="dropdown-toggle">Bejelentkezés</span>
-    <div class="dropdown-menu" style="right: 0;">
-      <RouterLink to="/loginregister">Bejelentkezés</RouterLink>
-    </div>
-  </div>
-</div>
-    
-
-    <div class="dropdown">
-    </div>
-  </div>
-
   <section class="relative mx-auto ">
     <nav class="flex justify-between bg-gray-900 text-white w-screen-75">
       <div class="px-5 xl:px-12 py-6 flex w-full items-center">
@@ -94,8 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dropdown-toggle hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-      <div class="dropdown-menu">
-        <span class="text-black" @click="logout()" style="margin: 20px;">Kijelentkezés</span>
+      <div class="dropdown-menu p-2 bg-gray-100 hover:bg-gray-200">
+        <span class="text-black" @click="logout()">Kijelentkezés</span>
       </div>
           </a>
           

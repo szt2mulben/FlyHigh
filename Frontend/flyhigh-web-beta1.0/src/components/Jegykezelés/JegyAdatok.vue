@@ -186,7 +186,7 @@
       </div>
 
       <div class="relative z-0 w-full mb-5 border-0 border-b-2 appearance-none">
-        <select id="billingCountry">
+        <select class="pr-2 pt-2 pb-2" id="billingCountry">
             <option value="Hungary">Magyarország</option>
             <option value="Hungary">Románia</option>
             <option value="Hungary">Bulgária</option>
