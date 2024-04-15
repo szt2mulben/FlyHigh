@@ -10,6 +10,44 @@ const user = getUsername(payload);
 const per = getPermissions(payload);
 const isLoggedIn = ref(!!user);
 
+document.addEventListener('DOMContentLoaded', function() {
+    const burger = document.querySelectorAll('.navbar-burger');
+    const menu = document.querySelectorAll('.navbar-menu');
+
+    if (burger.length && menu.length) {
+        for (var i = 0; i < burger.length; i++) {
+            burger[i].addEventListener('click', function() {
+                for (var j = 0; j < menu.length; j++) {
+                    menu[j].classList.toggle('hidden');
+                }
+            });
+        }
+    }
+
+    const close = document.querySelectorAll('.navbar-close');
+    const backdrop = document.querySelectorAll('.navbar-backdrop');
+
+    if (close.length) {
+        for (var i = 0; i < close.length; i++) {
+            close[i].addEventListener('click', function() {
+                for (var j = 0; j < menu.length; j++) {
+                    menu[j].classList.toggle('hidden');
+                }
+            });
+        }
+    }
+
+    if (backdrop.length) {
+        for (var i = 0; i < backdrop.length; i++) {
+            backdrop[i].addEventListener('click', function() {
+                for (var j = 0; j < menu.length; j++) {
+                    menu[j].classList.toggle('hidden');
+                }
+            });
+        }
+    }
+});
+
 </script>
 
 
@@ -32,14 +70,14 @@ const isLoggedIn = ref(!!user);
     </div>
   </div>
 
-  <section class="relative mx-auto">
+  <section class="relative mx-auto ">
     <nav class="flex justify-between bg-gray-900 text-white w-screen-75">
       <div class="px-5 xl:px-12 py-6 flex w-full items-center">
         <a class="text-3xl font-bold font-heading" href="/jegyadatok">
           <!-- <img class="h-9" src="logo.png" alt="logo"> -->
           Flyhigh
         </a>
-        <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+        <ul class="hidden navbar-hamburger md:flex px-4 mx-auto font-semibold font-heading space-x-12">
           <li><a class="hover:text-gray-200" href="#"><RouterLink to="/jegyadatok">Kezdőlap</RouterLink></a></li>
           <li><a class="hover:text-gray-200" href="#"><RouterLink to="/felhasznaloiadatok">Jogosultságok</RouterLink></a></li>
           <li><a class="hover:text-gray-200" href="#"><div class="dropdown">
@@ -47,8 +85,7 @@ const isLoggedIn = ref(!!user);
       <div class="dropdown-menu">
         <RouterLink to="/ujgep">Új GépAdatok</RouterLink>
         <RouterLink to="/gepadatok">GépAdatok</RouterLink>
-        <RouterLink to="">Repülőtér</RouterLink>
-        <RouterLink to="">Repülőtársaság</RouterLink>
+        <RouterLink to="/repuloterek">Repülőtér</RouterLink>
       </div>
     </div></a></li>
         </ul>
@@ -91,7 +128,43 @@ const isLoggedIn = ref(!!user);
       </a>
     </nav>
   </section>
-
+  <div class="navbar-menu relative z-50 hidden">
+		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+		<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+			<div class="flex items-center mb-8">
+				<a class="mr-auto text-3xl font-bold leading-none" href="#">
+				<h1 class="font-bold">Flyhigh</h1>
+				</a>
+				<button class="navbar-close">
+					<svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</button>
+			</div>
+			<div>
+				<ul>
+					<li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/jegyadatok">Kezdőlap</RouterLink></a>
+					</li>
+					<li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/felhasznaloiadatok">Jogosultságok</RouterLink></a>
+					</li>
+          <li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/ujgep">Új GépAdatok</RouterLink></a>
+					</li>
+          <li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/gepadatok">GépAdatok</RouterLink></a>
+					</li>
+          <li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/felhasznaloiadatok">Jogosultságok</RouterLink></a>
+					</li>
+					<li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/repuloterek">Repülőtér</RouterLink></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
 
   <RouterView />
 
