@@ -127,7 +127,7 @@
           <p class="font-bold text-xl">{{ flight.price }} Ft</p>
           <p class="text-xs text-gray-500">/fő</p>
         </div>
-        <button @click="reserveTicket(flight)" v-if="!bookingCompleted" class="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center"><div class="">Foglalj most!</div></button>
+        <button @click="reserveTicket(flight)" v-if="!bookingCompleted" class="w-32 h-11 rounded flex border-solid border text-white bg-green-800 transition-all duration-150 ease-linear hover:bg-pink-600 mx-2 justify-center place-items-center"><div class="">Foglalj most!</div></button>
       </div>
     </div>
   </div>
@@ -333,7 +333,42 @@ import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { parseToken, getUsername } from '../../utils/auth.js';
 import { useRouter } from 'vue-router';
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 const router = useRouter();
+
+
+const showToast = () => {
+  Toastify({
+    text: "Hiányzó keresési adatok!",
+    duration: 3000,
+    gravity: "top",
+    position: 'center',
+    backgroundColor: "#e80c2d"
+  }).showToast();
+};
+
+const showToast2 = () => {
+  Toastify({
+    text: "Maximum hely kiválasztva!",
+    duration: 3000,
+    gravity: "top",
+    position: 'center',
+    backgroundColor: "#e80c2d"
+  }).showToast();
+};
+
+const showToast3 = () => {
+  Toastify({
+    text: "Válassz ki ülőhelyet!",
+    duration: 3000,
+    gravity: "top",
+    position: 'center',
+    backgroundColor: "#e80c2d"
+  }).showToast();
+};
+
+
 
 const token = localStorage.getItem('token');
 const payload = parseToken(token);
@@ -422,6 +457,7 @@ const searchFlights = async () => {
     }
   } catch (error) {
     console.error('Hiba az adatok lekérdezésében:', error);
+    showToast();
   }
 };
 
@@ -465,6 +501,7 @@ const selectSeat = (row, seatNumber, column) => {
     }
   } else {
     console.log('Maximum seat count reached.');
+    showToast2();
   }
 };
 
@@ -508,6 +545,7 @@ const finalizeBooking = async () => {
 
   } catch (error) {
     console.error('Error finalizing booking:', error);
+    showToast3();
   }
 };
 

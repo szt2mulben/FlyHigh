@@ -72,6 +72,18 @@
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
+
+const showToast = () => {
+  Toastify({
+    text: "Nem megfelelő név/jelszó!",
+    duration: 3000,
+    gravity: "top",
+    position: 'center',
+    backgroundColor: "#e80c2d"
+  }).showToast();
+};
 
 const router = useRouter();
 const loginData = {
@@ -104,6 +116,7 @@ const login = async () => {
       console.log('Hiba: Sikertelen beléptetés');
     }
   } catch (error) {
+    showToast();
     console.error('Hiba:', error);
   }
 };
@@ -123,6 +136,7 @@ const register = async () => {
       console.log('Hiba: Sikertelen beléptetés');
     }
   } catch (error) {
+    showToast();
     console.error('Hiba:', error);
   }
 };
