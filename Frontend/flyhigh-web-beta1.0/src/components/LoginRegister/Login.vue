@@ -16,7 +16,7 @@
         <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
           Flyhigh - Flight Solutions
         </p>
-        <h2 class="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+        <h2 data-aos="fade-right" class="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
           Minden út egy kaland <br class="hidden md:block" /> -
           hadd legyenünk a vezetőid!
         </h2>
