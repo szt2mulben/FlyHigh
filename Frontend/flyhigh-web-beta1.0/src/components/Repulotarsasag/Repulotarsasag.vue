@@ -153,5 +153,16 @@
   width: 200px;
 }
 
+.info {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+}
+
+.info p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
   </style>
     
