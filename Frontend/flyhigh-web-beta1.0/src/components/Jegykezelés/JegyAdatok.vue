@@ -100,7 +100,7 @@
       <div class="flex flex-row place-items-center p-2">
         <img alt="Qatar Airways" class="w-10 h-10" src="data:image/png;base64,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" style="opacity: 1; transform-origin: 0% 50% 0px; transform: none;" />
         <div class="flex flex-col ml-2">
-          <p class="text-xs text-gray-500 font-bold">REPULOIJARA NEVE IDE Qatar Airways</p>
+          <p class="text-xs text-gray-500 font-bold">  Qatar Airways</p>
           <p class="text-xs text-gray-500">JARATSZAM IDE QR1456</p>
           <div class="text-xs text-gray-500">POGGYASZ RANDOM ADATTAL IDE 2*23kg</div>
         </div>
@@ -284,51 +284,48 @@
   </div>
 </div>
 
-  <div class="flight-search">
+  <div class="flight-search" v-if="!bookingCompleted">
     <h1 class="font-bold text-center text-4xl text-gray-600">Nem tudod hova utazz?</h1>
   <iframe style="margin:10%" width="75%" height="50%" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=1300&amp;hl=en&amp;q=Vasv%C3%A1ri+(Utazz%20b%C3%A1rhov%C3%A1)&amp;t=&amp;z=4&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps systems</a></iframe>
   </div>
 
-  <div class="mx-auto mt-8 px-6 sm:mt-16 lg:px-8 pb-10 w-screen-75 bg-gray-100">
     <h1 class="font-bold text-center text-4xl pt-10 text-gray-600">Repülőtársaságok akikkel együtt dolgozunk</h1>
-            <div class="text-center text-lg font-semibold leading-8 text-white my-8">
-                         <div
-                         x-data="{}"
-                         x-init="$nextTick(() => {
+                <div class="mx-auto max-w-7xl m-12 px-6 sm:mt-16 lg:px-8">
+                         <div x-data="{}" x-init="$nextTick(() => {
                              let ul = $refs.logos;
                              ul.insertAdjacentHTML('afterend', ul.outerHTML);
                              ul.nextSibling.setAttribute('aria-hidden', 'true');
-                         })"
-                     >
-                         <ul x-ref="logos" class="animate-infinite-scroll grayscale flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-[150px] animate-infinite-scroll">
+                         })" class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+                         <ul x-ref="logos" class="grayscale flex items-center justify-center md:justify-start [&amp;_li]:mx-8 [&amp;_img]:max-w-[150px] animate-infinite-scroll">
                              <li>
-                                 <img src="../../assets/Images/korean.png" alt="KoreanAir" />
+                                 <img src="../../assets/Images/luft.png" alt="Facebook">
                              </li>
                              <li>
-                                 <img src="../../assets/Images/airbaltic.png" alt="AirBaltic" />
+                                 <img src="../../assets/Images/airbaltic.png" alt="Disney">
                              </li>
                              <li>
-                                <img src="../../assets/Images/luft.png" alt="Luft" />
+                                <img src="../../assets/Images/korean.png" alt="Samsung">
                             </li>
                              <li>
-                                 <img src="../../assets/Images/turkish.png" alt="Turkish Airlines" />
+                                 <img src="../../assets/Images/turkish.png" alt="Spark">
+                             </li>
+                         </ul><ul x-ref="logos" class="grayscale flex items-center justify-center md:justify-start [&amp;_li]:mx-8 [&amp;_img]:max-w-[150px] animate-infinite-scroll" aria-hidden="true">
+                             <li>
+                                 <img src="../../assets/Images/luft.png" alt="Facebook">
                              </li>
                              <li>
-                                 <img src="../../assets/Images/turkish.png" alt="Turkish Airlines" />
+                                 <img src="../../assets/Images/luft.png" alt="Disney">
                              </li>
                              <li>
-                                 <img src="../../assets/Images/turkish.png" alt="Turkish Airlines" />
-                             </li>
+                                <img src="../../assets/Images/luft.png" alt="Samsung">
+                            </li>
                              <li>
-                                 <img src="../../assets/Images/turkish.png" alt="Turkish Airlines" />
-                             </li>
-                             <li>
-                                 <img src="../../assets/Images/turkish.png" alt="Turkish Airlines" />
+                                 <img src="../../assets/Images/luft.png" alt="Spark">
                              </li>
                          </ul>                
                      </div>
+     
                  </div>
-                </div>
 </template>
 
 <script setup>

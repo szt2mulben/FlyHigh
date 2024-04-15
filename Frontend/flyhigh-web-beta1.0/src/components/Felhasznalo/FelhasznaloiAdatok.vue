@@ -1,9 +1,9 @@
 <template> 
-<div class=" bg-gray-100 p-0 sm:p-12">
+<div class=" bg-gray-100 p-0 sm:p-12 mb-6">
   <h2 class="text-4xl pt-2 font-bold mb-8 text-center" data-aos="fade-down">Jogosultságok</h2>
-  <div class="mx-auto max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl flight-search">
+  <div class="mx-auto mb-6 max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl flight-search">
     <h1 class="text-2xl font-bold mb-8">Felhasznalói adatok(Admin)</h1>
-    <div id="form" novalidate>
+    <div id="form" novalidate class="pb-6">
       <div class="relative z-0 w-full mb-5">
         <input type="text" id="search" v-model="searchTerm" @input="searchUsers" placeholder="Keresés felhasználók között" class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
 
@@ -21,8 +21,8 @@
 </div>
 
   <div class="flex items-center justify-center mb-16 bg-gray-100 ">
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
-        <div v-for="user in megjelenitettuserek" :key="user.id" class="relative bg-white py-6 px-6 rounded-3xl w-64 shadow-xl">
+    <div class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+        <div v-for="user in megjelenitettuserek" :key="user.id" class=" relative bg-white py-6 px-6 rounded-3xl w-64 shadow-xl">
             <div class="mt-8">
                 <p class="text-xl font-semibold my-2">{{user.name}}</p>
                 <div class="flex space-x-2 text-gray-400 text-sm">
