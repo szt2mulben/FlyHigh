@@ -27,7 +27,7 @@
           <a
           @click="showHomes(); showHome = true"
            
-            class="bg-blue-400 text-white inline-flex items-center h-12 px-6 mr-6 font-medium tracking-wide  rounded shadow-md"
+            class="bg-blue-400 cursor-pointer text-white inline-flex items-center h-12 px-6 mr-6 font-medium tracking-wide  rounded shadow-md"
           >
             Jegyvásárlás
         </a>
