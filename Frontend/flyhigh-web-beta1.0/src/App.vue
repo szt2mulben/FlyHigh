@@ -93,11 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
-        <span class="flex absolute -mt-5 ml-4">
-          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
-          </span>
-        </span>
       </a>
       <a class="navbar-burger self-center mr-12 xl:hidden" href="#">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,28 +117,28 @@ document.addEventListener('DOMContentLoaded', function() {
 			<div>
 				<ul>
 					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/jegyadatok">Kezdőlap</RouterLink></a>
+						<RouterLink to="/jegyadatok" class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100">Kezdőlap</RouterLink>
 					</li>
 					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/felhasznaloiadatok">Jogosultságok</RouterLink></a>
+						<RouterLink to="/felhasznaloiadatok" class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100">Jogosultságok</RouterLink>
 					</li>
           <li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/ujgep">Új GépAdatok</RouterLink></a>
+						<RouterLink to="/ujgep" class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100">Új GépAdatok</RouterLink>
 					</li>
           <li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/gepadatok">GépAdatok</RouterLink></a>
+						<RouterLink to="/gepadatok" class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100">GépAdatok</RouterLink>
 					</li>
 					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"><RouterLink to="/repuloterek">Repülőtér</RouterLink></a>
+						<RouterLink to="/repuloterek"  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100">Repülőtér</RouterLink>
 					</li>
           <li class="mb-1">
-            <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" target="_blank" href="https://booking.com">Hotel</a>
+            <a  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" target="_blank" href="https://booking.com">Hotel</a>
           </li>
           <li class="mb-1">
-            <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"> <RouterLink to="/sajatadatok">Személyes Adatok</RouterLink></a>
+            <RouterLink to="/sajatadatok" class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100">Személyes Adatok</RouterLink>
           </li>
           <li class="mb-1">
-            <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"> <span class="text-gray-400" @click="logout()">Kijelentkezés</span></a>
+            <a  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-100" href="#"> <span  @click="logout()" >Kijelentkezés</span></a>
           </li>
 				</ul>
 			</div>
@@ -157,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="text-center">
             <h3 class="text-2xl mb-3"> Iratkozzon fel hírlevelünkre! </h3>
             <p class="text-gray-300"> Légy naprakész. </p>
-            <div class="flex justify-center my-4">
+            <div class="flex justify-center mt-14 my-4">
               <form class="mt-2">
         <div class="relative max-w-lg">
           <label class="sr-only" for="email"> Email </label>
