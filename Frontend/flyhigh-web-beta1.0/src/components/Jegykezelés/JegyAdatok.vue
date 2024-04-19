@@ -252,7 +252,7 @@
         <div class="plane-seats">
           <div class="left-column">
             <div class="column" v-for="row in 2" :key="row">
-              <div class="row" v-for="column in 2" :key="column">
+              <div class="row" v-for="column in 1" :key="column">
                 <div class="seat"
                     :class="{ 'unavailable': isSeatBooked(row, seatNumber, column), 'selected': isSelectedSeat(row, seatNumber, column) }"
                     v-for="seatNumber in 30"
@@ -266,13 +266,13 @@
           <div class="empty-column"></div>
           <div class="right-column">
             <div class="column" v-for="row in 2" :key="row">
-              <div class="row" v-for="column in 2" :key="column">
+              <div class="row" v-for="column in 1" :key="column">
                 <div class="seat"
                     :class="{ 'unavailable': isSeatBooked(row, seatNumber, 3 + column), 'selected': isSelectedSeat(row, seatNumber, 3 + column) }"
                     v-for="seatNumber in 30"
                     :key="(3 + column - 1)  * 30 + seatNumber"
                     @click="selectSeat(row, seatNumber, 3 + column)">
-                  {{ getSeatLabel(row, seatNumber, 3 + column) }}
+                  {{ getSeatLabel(row, seatNumber, 2+ column) }}
                 </div>
               </div>
             </div>
@@ -508,7 +508,7 @@ const getSeatLabel = (row, seatNumber, column) => {
   const seatIndex = (row - 1) * 30 + (column - 1) * 30 + seatNumber;
   const isBooked = isSeatBooked(row, seatNumber, column);
   if (isBooked) {
-    return 'X';
+    return `${seatIndex}`;
   } else {
     return `${seatIndex}`;
   }

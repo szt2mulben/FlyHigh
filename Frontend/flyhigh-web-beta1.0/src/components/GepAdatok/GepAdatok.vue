@@ -38,10 +38,10 @@
                 <div class="my-2">
                         <p class="font-semibold text-base mb-2">Első osztály foglalt helyek: {{gepek.elsoosztulohelyek}}</p>
                         <div v-if="currentUserPermission === 'Admin'" class="text-base text-gray-400 font-semibold flex justify-between">
-                          <p class="font-bold text-gray-600"><button @click="showEditModal(user)">Módosítás</button></p>
+                          <p class="font-bold text-gray-600"><button @click="showEditModal(gepek)">Módosítás</button></p>
                         
                         <div class="text-base text-gray-400 font-semibold">
-                            <p class="text-red-400"><button @click="deleteuser(user.id)">Törlés</button></p>
+                            <p class="text-red-400"><button @click="deletegep(gepek.id)">Törlés</button></p>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@ const keresesValtozas = async () => {
       console.error('Hiba történt a gépadatok keresése közben:', error);
     }
   } else {
-    alert("Ne hagy üresen a mezőt.");
+    alert("Ne hagyd üresen a mezőt.");
   }
 };
 

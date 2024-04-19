@@ -154,10 +154,10 @@ const login = async () => {
 
 
     } else {
+      showToast();
       console.log('Hiba: Sikertelen beléptetés');
     }
   } catch (error) {
-    showToast();
     console.error('Hiba:', error);
   }
 };
@@ -171,8 +171,10 @@ const register = async () => {
       'Permission' : "Ugyfel"
     });
 
+    console.log(registerData.value)
+
     if (response.status === 200) {
-      showRegisterForm.value = false;
+      showRegisterForm.value = true;
     } else {
       console.log('Hiba: Sikertelen beléptetés');
     }
@@ -186,8 +188,6 @@ const showHomes = async () => {
 
     if (showHome.value == true) {
       showHome.value = true;
-    } else {
-      console.log('Hiba: Sikertelen beléptetés');
     }
 };
 </script>

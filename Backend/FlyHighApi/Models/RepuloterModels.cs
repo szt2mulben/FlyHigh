@@ -15,7 +15,7 @@ namespace FlyHighApi.Models
         public string LastName { get; set; } = null!;
 
         [StringLength(50)]
-        public string BirthsDay { get; set; } = null;
+        public string BirthsDay { get; set; } = null!;
 
         [StringLength(50)]
         public string Country { get; set; } = null!;

@@ -123,6 +123,7 @@ namespace FlyHighApi.Controllers
                 {
                     var user = new UseradatokModel { Id = registerModel.Id, Name = registerModel.Name, Password = registerModel.Password, Email = registerModel.Email, Permission = "Ugyfel" };
                     _context.UserData.Add(user);
+                    Debug.WriteLine(user.Name);
                     await _context.SaveChangesAsync();
                     return Ok();
                 }
