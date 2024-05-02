@@ -289,42 +289,7 @@
   <iframe style="margin:10%" width="75%" height="50%" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=1300&amp;hl=en&amp;q=Vasv%C3%A1ri+(Utazz%20b%C3%A1rhov%C3%A1)&amp;t=&amp;z=4&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps systems</a></iframe>
   </div>
 
-    <h1 class="font-bold text-center text-4xl pt-10 text-gray-600">Repülőtársaságok akikkel együtt dolgozunk</h1>
-                <div class="mx-auto max-w-7xl m-12 px-6 sm:mt-16 lg:px-8">
-                         <div x-data="{}" x-init="$nextTick(() => {
-                             let ul = $refs.logos;
-                             ul.insertAdjacentHTML('afterend', ul.outerHTML);
-                             ul.nextSibling.setAttribute('aria-hidden', 'true');
-                         })" class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-                         <ul x-ref="logos" class="grayscale flex  items-center justify-center md:justify-start [&amp;_li]:mx-8 [&amp;_img]:max-w-[150px] animate-infinite-scroll">
-                             <li>
-                                 <img src="../../assets/Images/luft.png" alt="luft">
-                             </li>
-                             <li>
-                                 <img src="../../assets/Images/airbaltic.png" alt="airbaltic">
-                             </li>
-                             <li>
-                                <img  src="../../assets/Images/korean.png" alt="korean">
-                            </li>
-                             <li>
-                                 <img src="../../assets/Images/turkish.png" alt="turkish">
-                             </li>
-                             <li>
-                                 <img class="w-24" src="../../assets/Images/alitalia.png" alt="alitalia">
-                             </li>
-                             <li>
-                                 <img class="w-24" src="../../assets/Images/dutch.png" alt="dutch">
-                             </li>
-                             <li>
-                                <img class="w-24" src="../../assets/Images/americanairlines.png" alt="americanairlines">
-                            </li>
-                             <li>
-                                 <img class="w-24" src="../../assets/Images/wizzair.png" alt="wizzair">
-                             </li>
-                         </ul>                
-                     </div>
-     
-                 </div>
+
 </template>
 
 <script setup>

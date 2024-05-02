@@ -48,28 +48,28 @@
                          })" class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
                          <ul x-ref="logos" class="grayscale flex  items-center justify-center md:justify-start [&amp;_li]:mx-8 [&amp;_img]:max-w-[150px] animate-infinite-scroll">
                              <li>
-                                 <img src="../../assets/Images/luft.png" alt="luft">
+                                 <img src="../assets/Images/luft.png" alt="luft">
                              </li>
                              <li>
-                                 <img src="../../assets/Images/airbaltic.png" alt="airbaltic">
+                                 <img src="../assets/Images/airbaltic.png" alt="airbaltic">
                              </li>
                              <li>
-                                <img  src="../../assets/Images/korean.png" alt="korean">
+                                <img  src="../assets/Images/korean.png" alt="korean">
                             </li>
                              <li>
-                                 <img src="../../assets/Images/turkish.png" alt="turkish">
+                                 <img src="../assets/Images/turkish.png" alt="turkish">
                              </li>
                              <li>
-                                 <img class="w-24" src="../../assets/Images/alitalia.png" alt="alitalia">
+                                 <img class="w-24" src="../assets/Images/alitalia.png" alt="alitalia">
                              </li>
                              <li>
-                                 <img class="w-24" src="../../assets/Images/dutch.png" alt="dutch">
+                                 <img class="w-24" src="../assets/Images/dutch.png" alt="dutch">
                              </li>
                              <li>
-                                <img class="w-24" src="../../assets/Images/americanairlines.png" alt="americanairlines">
+                                <img class="w-24" src="../assets/Images/americanairlines.png" alt="americanairlines">
                             </li>
                              <li>
-                                 <img class="w-24" src="../../assets/Images/wizzair.png" alt="wizzair">
+                                 <img class="w-24" src="../assets/Images/wizzair.png" alt="wizzair">
                              </li>
                          </ul>                
                      </div>
